@@ -14,7 +14,6 @@
     * { box-sizing: border-box; }
     body { background: var(--bg); font-family: 'Nanum Gothic', sans-serif; margin: 0; color: var(--text-main); line-height: 1.6; }
     
-    /* 네비게이션 - 한 줄 크기 극소화 */
     nav { background: var(--navy); display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; position: sticky; top: 0; z-index: 1000; }
     .nav-links { display: flex; gap: 20px; }
     .nav-links a { color: var(--white); text-decoration: none; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
@@ -22,7 +21,6 @@
     .user-info { color: rgba(255, 201, 71, 0.4); font-size: 0.45rem; display: flex; align-items: center; gap: 5px; }
     .logout-btn { background: none; border: none; color: rgba(255, 255, 255, 0.3); cursor: pointer; font-size: 0.4rem; text-decoration: underline; padding: 0; }
 
-    /* 헤더 - 정갈한 디자인 */
     header { background: var(--navy); color: var(--white); padding: 50px 20px; text-align: center; border-bottom: 8px solid var(--yellow); }
     header h1 { font-size: 2.2rem; margin: 0; color: var(--yellow); letter-spacing: 5px; font-weight: 800; }
     header p { opacity: 0.8; margin-top: 10px; font-size: 0.9rem; letter-spacing: 1px; }
@@ -31,36 +29,30 @@
     .content-layer.active { display: block; animation: fadeInUp 0.4s ease-out; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* 카드 디자인 - 민음사 오마주 스타일 */
     .card { background: var(--white); border: 1px solid var(--border); border-radius: 0; padding: 40px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .card-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 25px; border-bottom: 2px solid var(--navy); padding-bottom: 10px; display: inline-block; }
 
-    /* 리스트 스타일 */
     .novel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 1px solid var(--border); margin-bottom: 15px; cursor: pointer; transition: 0.3s; background: #fff; }
     .novel-list-item:hover { border-color: var(--navy); transform: translateX(5px); }
     
-    /* 펀딩 프로그레스 바 */
     .progress-bg { background: #eee; height: 10px; border-radius: 5px; overflow: hidden; margin: 20px 0; }
     .progress-fill { height: 100%; background: var(--navy); width: 0%; transition: 1s ease-in-out; }
 
-    /* PUBLISHED 도서 그리드 - 보내주신 이미지 반영 */
     .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
     .book-card { background: var(--white); border: 1px solid var(--border); padding: 20px; text-align: center; transition: 0.3s; }
-    .book-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
     .book-img-wrapper { width: 100%; height: 380px; background-color: #fdfdfd; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #f0f0f0; }
     .book-card img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.1)); }
     .book-card h3 { font-size: 1rem; color: var(--navy); margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
 
-    /* 상세 페이지 원고 본문 */
     .novel-body { background: #fff; padding: 40px; border: 1px solid var(--border); white-space: pre-wrap; font-size: 1.05rem; line-height: 2; border-left: 5px solid var(--navy); }
 
     input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); font-family: inherit; outline: none; }
-    input:focus { border-color: var(--navy); }
     .btn { background: var(--navy); color: var(--yellow); border: none; padding: 15px 30px; font-weight: 800; cursor: pointer; transition: 0.3s; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
     .btn:hover { background: #1a3a6d; color: #fff; }
     .btn-sm { padding: 8px 16px; font-size: 0.8rem; width: auto; }
 
     .review-item { font-size: 0.9rem; padding: 15px; background: #f9f9f9; border: 1px solid var(--border); margin-bottom: 10px; }
+    .review-lock-msg { font-size: 0.8rem; color: var(--text-sub); text-align: center; padding: 15px; background: #fcfcfc; border: 1px dashed var(--border); }
   </style>
 </head>
 <body>
@@ -88,7 +80,7 @@
     <div class="card-title">PROCESS</div>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center;">
       <div style="padding: 20px; border: 1px solid var(--border); background: #fff;"><b>01 투고</b></div>
-      <div style="padding: 20px; border: 1px solid var(--border); background: #fff;"><b>02 검증</b></div>
+      <div style="padding: 20px; border: 1px solid var(--border); background: #fff;"><b>02 리뷰확인</b></div>
       <div style="padding: 20px; border: 1px solid var(--border); background: #fff;"><b>03 펀딩</b></div>
       <div style="padding: 20px; border: 1px solid var(--border); background: #fff;"><b>04 출판</b></div>
     </div>
@@ -111,20 +103,7 @@
 <div id="writer" class="content-layer"><div class="card"><div class="card-title">SUBMIT MANUSCRIPT</div><div id="writer-form-area"></div></div></div>
 <div id="published" class="content-layer"><div class="card"><div class="card-title">BAUHAUS COLLECTION</div><div id="published-grid" class="book-grid"></div></div></div>
 <div id="mypage" class="content-layer"><div class="card"><div class="card-title">MY DASHBOARD</div><div id="mypage-content"></div><div style="margin-top:40px; text-align:right;"><span style="color:var(--red); cursor:pointer; font-size:0.75rem; text-decoration:underline;" onclick="processLeave()">ACCOUNT WITHDRAWAL</span></div></div></div>
-
-<div id="admin" class="content-layer">
-  <div class="card">
-    <div class="card-title" style="color:var(--purple);">REGISTER COLLECTION</div>
-    <input type="text" id="pub-title" placeholder="도서 제목">
-    <div style="border: 2px dashed var(--border); padding: 30px; text-align: center; cursor: pointer; margin-bottom: 20px;" onclick="document.getElementById('pub-file').click()">
-      <span id="file-name">표지 이미지 업로드 (최적화 지원)</span>
-      <input type="file" id="pub-file" accept="image/*" style="display:none" onchange="optimizeAndPreview(this)">
-    </div>
-    <input type="hidden" id="pub-img-data">
-    <button class="btn" onclick="addPublishedBook()">REGISTER NOW</button>
-  </div>
-  <div class="card"><div class="card-title">MANAGE COLLECTION</div><div id="admin-book-manage"></div></div>
-</div>
+<div id="admin" class="content-layer"><div class="card"><div class="card-title" style="color:var(--purple);">REGISTER COLLECTION</div><input type="text" id="pub-title" placeholder="도서 제목"><div style="border: 2px dashed var(--border); padding: 30px; text-align: center; cursor: pointer; margin-bottom: 20px;" onclick="document.getElementById('pub-file').click()"><span id="file-name">표지 이미지 업로드</span><input type="file" id="pub-file" accept="image/*" style="display:none" onchange="optimizeAndPreview(this)"></div><input type="hidden" id="pub-img-data"><button class="btn" onclick="addPublishedBook()">REGISTER NOW</button></div><div class="card"><div class="card-title">MANAGE COLLECTION</div><div id="admin-book-manage"></div></div></div>
 
 <script>
   let users = JSON.parse(localStorage.getItem('rv_users')) || [];
@@ -144,14 +123,12 @@
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.getElementById('link-' + id).classList.add('active');
-    
     if(id === 'writer') renderWriterForm();
     if(id === 'reader') toggleReaderView('list');
     if(id === 'published') renderPublished();
     if(id === 'mypage') renderMyPage();
     if(id === 'admin') renderAdminManage();
     updateUI();
-    window.scrollTo(0,0);
   }
 
   function toggleReaderView(view) {
@@ -173,6 +150,7 @@
     });
   }
 
+  // --- 상세 페이지 (리뷰 선열람 로직 적용) ---
   function showNovelDetail(id) {
     const n = novels.find(x => x.id === id);
     const per = Math.min((n.stars / GOAL) * 100, 100).toFixed(1);
@@ -191,23 +169,30 @@
         </div>
         <button class="btn" style="margin-top:20px; background:var(--yellow); color:var(--navy);" onclick="vote(${n.id}, '${n.authorId}')">VOTE FOR PUBLISHING</button>
       </div>
+
+      <div class="card">
+        <div class="card-title">READER REVIEWS (${novelReviews.length})</div>
+        ${isFunded ? `
+          <div style="display:flex; gap:10px; margin-bottom:30px;">
+            <input type="text" id="rev-input" placeholder="한 줄 서평을 입력하세요.">
+            <button class="btn btn-sm" onclick="addReview(${n.id})">ADD</button>
+          </div>
+        ` : `<div class="review-lock-msg">서평 작성은 펀딩 참여 후에 가능합니다.</div>`}
+        
+        <div id="review-list-area" style="margin-top:20px;">
+          ${novelReviews.length > 0 ? 
+            novelReviews.map(r => `<div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>`).reverse().join('') : 
+            "<p style='text-align:center; color:#999;'>첫 서평을 기다리고 있습니다.</p>"}
+        </div>
+      </div>
+
       ${isFunded ? `
         <div class="card">
           <div class="card-title">MANUSCRIPT</div>
           <div class="novel-body">${n.content}</div>
         </div>
-        <div class="card">
-          <div class="card-title">READER REVIEWS</div>
-          <div style="display:flex; gap:10px; margin-bottom:30px;">
-            <input type="text" id="rev-input" placeholder="한 줄 서평을 입력하세요.">
-            <button class="btn btn-sm" onclick="addReview(${n.id})">ADD</button>
-          </div>
-          <div id="review-list-area">
-            ${novelReviews.map(r => `<div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>`).reverse().join('')}
-          </div>
-        </div>
       ` : `
-        <div class="card" style="text-align:center; border: 2px dashed var(--border);"><p>🔒 펀딩(별점 주기) 참여 후 원고 전문과 서평을 보실 수 있습니다.</p></div>
+        <div class="card" style="text-align:center; border: 2px dashed var(--border);"><p>🔒 펀딩(별점 주기) 참여 후 원고 전문을 보실 수 있습니다.</p></div>
       `}
     `;
     toggleReaderView('detail');
@@ -240,62 +225,13 @@
     showNovelDetail(novelId);
   }
 
-  function renderPublished() {
-    const grid = document.getElementById('published-grid');
-    grid.innerHTML = publishedBooks.length === 0 ? "<p>No collection registered.</p>" : publishedBooks.map(b => `
-      <div class="book-card">
-        <div class="book-img-wrapper">
-          <img src="${b.img}" alt="${b.title}">
-        </div>
-        <h3>${b.title}</h3>
-      </div>`).join('');
-  }
-
-  function renderMyPage() {
-    const area = document.getElementById('mypage-content');
-    if(!currentUser) return;
-    if(currentUser.role === 'writer') {
-      const myNovels = novels.filter(n => n.authorId === currentUser.id);
-      area.innerHTML = `<h4>MY MANUSCRIPTS (${myNovels.length})</h4>`;
-      myNovels.forEach(n => { area.innerHTML += `<div class="novel-list-item" style="cursor:default"><div><b>${n.title}</b></div><div>★ ${n.stars}</div></div>`; });
-    } else {
-      let myReviewsCount = 0;
-      let reviewHtml = `<h4>MY REVIEWS</h4>`;
-      Object.keys(reviews).forEach(novelId => {
-        const novel = novels.find(x => x.id == novelId);
-        reviews[novelId].forEach(r => {
-          if(r.authorId === currentUser.id) {
-            myReviewsCount++;
-            reviewHtml += `<div class="review-item"><b>[${novel ? novel.title : 'MANUSCRIPT'}]</b> ${r.text}</div>`;
-          }
-        });
-      });
-      area.innerHTML = myReviewsCount === 0 ? "<p>No reviews yet.</p>" : reviewHtml;
-    }
-  }
-
-  function updateUI() {
-    const nav = document.getElementById('auth-nav');
-    if(currentUser) {
-      nav.innerHTML = `${currentUser.name}님 <button class="logout-btn" onclick="logout()">[LOGOUT]</button>`;
-      document.getElementById('link-admin').style.display = (currentUser.id === ADMIN_CONFIG.id) ? 'inline-block' : 'none';
-    } else { nav.innerHTML = "SIGN IN"; document.getElementById('link-admin').style.display = 'none'; }
-    if(document.getElementById('home').classList.contains('active')) renderAuthUI();
-  }
-
-  function renderAuthUI() {
-    const area = document.getElementById('auth-ui');
-    if(currentUser) { area.innerHTML = `<div style="text-align:center; padding:10px; font-weight:800;">WELCOME, ${currentUser.name}.</div>`; }
-    else { area.innerHTML = `<div class="card" style="max-width:400px; margin:0 auto; border-top: 4px solid var(--navy);"><input type="text" id="li-id" placeholder="ID"><input type="password" id="li-pw" placeholder="PW"><button class="btn" onclick="login()">SIGN IN</button><hr style="margin:20px 0; border:0; border-top:1px solid #eee;"><select id="rg-role"><option value="writer">ARTIST JOIN</option><option value="reader">CURATOR JOIN</option></select><input type="text" id="rg-id" placeholder="ID"><input type="password" id="rg-pw" placeholder="PW"><input type="text" id="rg-name" placeholder="NAME"><input type="text" id="rg-birth" placeholder="BIRTH (YYYYMMDD)"><input type="text" id="rg-phone" placeholder="PHONE (NUMBER ONLY)"><button class="btn" style="background:#f4f4f4; color:#333;" onclick="signup()">CREATE ACCOUNT</button></div>`; }
-  }
-
+  // --- 이하 유틸리티 함수 (기존과 동일) ---
   function login() {
     const id = document.getElementById('li-id').value; const pw = document.getElementById('li-pw').value;
     if(id === ADMIN_CONFIG.id && pw === ADMIN_CONFIG.pw) currentUser = { id: 'admin', name: 'ADMIN', role: 'admin' };
     else { const user = users.find(u => u.id === id && u.pw === pw); if(!user) return alert("Fail"); currentUser = user; }
     localStorage.setItem('rv_current', JSON.stringify(currentUser)); showPage('home');
   }
-
   function signup() {
     const role = document.getElementById('rg-role').value; const id = document.getElementById('rg-id').value;
     const pw = document.getElementById('rg-pw').value; const name = document.getElementById('rg-name').value;
@@ -305,8 +241,18 @@
     users.push({id, pw, name, role, birth, phone});
     localStorage.setItem('rv_users', JSON.stringify(users)); alert("Welcome!"); renderAuthUI();
   }
-
   function logout() { currentUser = null; localStorage.removeItem('rv_current'); showPage('home'); }
+  function updateUI() {
+    const nav = document.getElementById('auth-nav');
+    if(currentUser) { nav.innerHTML = `${currentUser.name}님 <button class="logout-btn" onclick="logout()">[LOGOUT]</button>`; document.getElementById('link-admin').style.display = (currentUser.id === ADMIN_CONFIG.id) ? 'inline-block' : 'none'; }
+    else { nav.innerHTML = "SIGN IN"; document.getElementById('link-admin').style.display = 'none'; }
+    if(document.getElementById('home').classList.contains('active')) renderAuthUI();
+  }
+  function renderAuthUI() {
+    const area = document.getElementById('auth-ui');
+    if(currentUser) { area.innerHTML = `<div style="text-align:center; padding:10px; font-weight:800;">WELCOME, ${currentUser.name}.</div>`; }
+    else { area.innerHTML = `<div class="card" style="max-width:400px; margin:0 auto; border-top: 4px solid var(--navy);"><input type="text" id="li-id" placeholder="ID"><input type="password" id="li-pw" placeholder="PW"><button class="btn" onclick="login()">SIGN IN</button><hr style="margin:20px 0; border:0; border-top:1px solid #eee;"><select id="rg-role"><option value="writer">ARTIST JOIN</option><option value="reader">CURATOR JOIN</option></select><input type="text" id="rg-id" placeholder="ID"><input type="password" id="rg-pw" placeholder="PW"><input type="text" id="rg-name" placeholder="NAME"><input type="text" id="rg-birth" placeholder="BIRTH (YYYYMMDD)"><input type="text" id="rg-phone" placeholder="PHONE (NUMBER ONLY)"><button class="btn" style="background:#f4f4f4; color:#333;" onclick="signup()">CREATE ACCOUNT</button></div>`; }
+  }
   function renderWriterForm() {
     const area = document.getElementById('writer-form-area');
     if(!currentUser || currentUser.role !== 'writer') { area.innerHTML = "<p>Writer only.</p>"; return; }
@@ -315,6 +261,10 @@
   function saveNovel() {
     novels.push({ id: Date.now(), author: currentUser.name, authorId: currentUser.id, title: document.getElementById('wt-title').value, content: document.getElementById('wt-content').value, stars: 0 });
     localStorage.setItem('rv_novels', JSON.stringify(novels)); showPage('reader');
+  }
+  function renderPublished() {
+    const grid = document.getElementById('published-grid');
+    grid.innerHTML = publishedBooks.length === 0 ? "<p>No collection registered.</p>" : publishedBooks.map(b => `<div class="book-card"><div class="book-img-wrapper"><img src="${b.img}" alt="${b.title}"></div><h3>${b.title}</h3></div>`).join('');
   }
   function renderAdminManage() {
     const area = document.getElementById('admin-book-manage');
@@ -325,6 +275,22 @@
     const t = document.getElementById('pub-title').value; const m = document.getElementById('pub-img-data').value;
     if(!t || !m) return; publishedBooks.push({ title: t, img: m });
     localStorage.setItem('rv_books', JSON.stringify(publishedBooks)); showPage('published');
+  }
+  function renderMyPage() {
+    const area = document.getElementById('mypage-content');
+    if(!currentUser) return;
+    if(currentUser.role === 'writer') {
+      const myNovels = novels.filter(n => n.authorId === currentUser.id);
+      area.innerHTML = `<h4>MY MANUSCRIPTS (${myNovels.length})</h4>`;
+      myNovels.forEach(n => { area.innerHTML += `<div class="novel-list-item" style="cursor:default"><div><b>${n.title}</b></div><div>★ ${n.stars}</div></div>`; });
+    } else {
+      let myReviewsCount = 0; let reviewHtml = `<h4>MY REVIEWS</h4>`;
+      Object.keys(reviews).forEach(novelId => {
+        const novel = novels.find(x => x.id == novelId);
+        reviews[novelId].forEach(r => { if(r.authorId === currentUser.id) { myReviewsCount++; reviewHtml += `<div class="review-item"><b>[${novel ? novel.title : 'MANUSCRIPT'}]</b> ${r.text}</div>`; } });
+      });
+      area.innerHTML = myReviewsCount === 0 ? "<p>No reviews yet.</p>" : reviewHtml;
+    }
   }
   function processLeave() { if(confirm("LEAVE?")) { users = users.filter(u => u.id !== currentUser.id); localStorage.setItem('rv_users', JSON.stringify(users)); logout(); } }
   function optimizeAndPreview(input) {
@@ -344,9 +310,7 @@
     };
     reader.readAsDataURL(file);
   }
-
   showPage('home');
 </script>
 </body>
 </html>
-
