@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIVAL; REVIVAL - 정직한 출판 플랫폼</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0A1931; --yellow: #FFC947; --white: #FFFFFF;
+      --bg: #F8F9FA; --border: #E9ECEF; --text-main: #212529; --text-sub: #6C757D;
+      --red: #FF6B6B; --green: #51CF66; --purple: #AE72FF;
+    }
+    * { box-sizing: border-box; }
+    body { background: var(--bg); font-family: 'Nanum Gothic', sans-serif; margin: 0; color: var(--text-main); line-height: 1.6; }
+    
+    nav { background: var(--navy); display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a { color: var(--white); text-decoration: none; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+    .nav-links a.active, .nav-links a:hover { color: var(--yellow); }
+    .user-info { color: rgba(255, 201, 71, 0.4); font-size: 0.45rem; display: flex; align-items: center; gap: 5px; }
+    .logout-btn { background: none; border: none; color: rgba(255, 255, 255, 0.3); cursor: pointer; font-size: 0.4rem; text-decoration: underline; padding: 0; }
+
+    header { background: var(--navy); color: var(--white); padding: 40px 20px; text-align: center; border-bottom: 6px solid var(--yellow); }
+    .brand-icon { font-size: 3.5rem; margin-bottom: 10px; display: block; }
+    header h1 { font-size: 2.2rem; margin: 0; color: var(--yellow); letter-spacing: 4px; font-weight: 800; }
+    header p { opacity: 0.7; margin-top: 10px; font-size: 0.9rem; }
+
+    .content-layer { display: none; max-width: 960px; margin: 40px auto; padding: 0 20px; }
+    .content-layer.active { display: block; animation: fadeInUp 0.4s ease-out; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 35px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+    .card-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; color: var(--navy); }
+    .card-title::before { content: ''; width: 4px; height: 20px; background: var(--yellow); border-radius: 2px; }
+
+    .novel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; cursor: pointer; transition: 0.2s; background: #fff; }
+    .novel-list-item:hover { border-color: var(--yellow); transform: translateX(5px); }
+    
+    .back-btn { display: inline-block; margin-bottom: 20px; color: var(--text-sub); cursor: pointer; font-size: 0.9rem; font-weight: 800; }
+    .progress-bg { background: #eee; height: 14px; border-radius: 7px; overflow: hidden; margin: 20px 0; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--navy), #185ADB); width: 0%; transition: 1s; }
+    .novel-body { background: #fff; padding: 30px; border: 1px solid var(--border); border-radius: 12px; margin-top: 20px; white-space: pre-wrap; font-size: 1.05rem; line-height: 1.9; }
+
+    input, textarea, select { width: 100%; padding: 14px; margin-bottom: 15px; border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; }
+    .btn { background: var(--navy); color: var(--yellow); border: none; padding: 14px 28px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; width: 100%; }
+    .btn:hover { background: #162D50; transform: translateY(-2px); }
+    .btn-sm { padding: 8px 16px; font-size: 0.85rem; width: auto; }
+
+    .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
+    .book-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 15px; text-align: center; }
+    .book-img-wrapper { width: 100%; height: 300px; background-color: #f0f0f0; border-radius: 10px; overflow: hidden; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; }
+    .book-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-links">
+    <a onclick="showPage('home')" id="link-home">HOME</a>
+    <a onclick="showPage('writer')" id="link-writer">WRITER</a>
+    <a onclick="showPage('reader')" id="link-reader">READER</a>
+    <a onclick="showPage('published')" id="link-published">PUBLISHED</a>
+    <a onclick="showPage('mypage')" id="link-mypage">MY PAGE</a>
+    <a onclick="showPage('admin')" id="link-admin" style="display:none; color:var(--purple);">ADMIN</a>
+  </div>
+  <div id="auth-nav" class="user-info"></div>
+</nav>
+
+<header>
+  <span class="brand-icon">🐣</span>
+  <h1>RIVAL; REVIVAL</h1>
+  <p>정직한 한 표가 작가의 꿈을 깨웁니다</p>
+</header>
+
+<div id="home" class="content-layer active">
+  <div id="auth-ui"></div>
+  <div class="card">
+    <div class="card-title">중복 투표 방지 안내</div>
+    <p style="font-size:0.9rem; color:var(--text-sub);">
+        RIVAL; REVIVAL은 공정한 펀딩을 위해 **1인 1작가 1회 투표**를 원칙으로 합니다.<br>
+        생년월일과 연락처 기반의 검증을 통해 부정 투표를 엄격히 제한하고 있습니다.
+    </p>
+  </div>
+</div>
+
+<div id="reader" class="content-layer">
+  <div id="reader-list-view">
+    <div class="card">
+      <div class="card-title">원고 목록</div>
+      <div id="novel-list"></div>
+    </div>
+  </div>
+  <div id="reader-detail-view" style="display:none;">
+    <div class="back-btn" onclick="toggleReaderView('list')">← 목록으로 돌아가기</div>
+    <div id="novel-detail-content"></div>
+  </div>
+</div>
+
+<div id="writer" class="content-layer"><div class="card"><div class="card-title">원고 투고실</div><div id="writer-form-area"></div></div></div>
+<div id="published" class="content-layer"><div class="card"><div class="card-title">공식 출판 목록</div><div id="published-grid" class="book-grid"></div></div></div>
+
+<div id="mypage" class="content-layer">
+  <div class="card">
+    <div class="card-title">나의 활동 대시보드</div>
+    <div id="mypage-content"></div>
+    <div style="margin-top:40px; text-align:right;"><span style="color:var(--red); cursor:pointer; font-size:0.8rem; text-decoration:underline;" onclick="processLeave()">계정 탈퇴</span></div>
+  </div>
+</div>
+
+<div id="admin" class="content-layer">
+  <div class="card">
+    <div class="card-title" style="color:var(--purple);">공식 도서 등록</div>
+    <input type="text" id="pub-title" placeholder="도서 제목"><div style="border: 2px dashed var(--border); padding: 30px; text-align: center; cursor: pointer; border-radius: 12px; margin-bottom: 20px;" onclick="document.getElementById('pub-file').click()"><span id="file-name">표지 이미지 선택</span><input type="file" id="pub-file" accept="image/*" style="display:none" onchange="optimizeAndPreview(this)"></div><input type="hidden" id="pub-img-data"><button class="btn" style="background:var(--purple); color:white;" onclick="addPublishedBook()">등록하기</button></div>
+  <div class="card"><div class="card-title">등록 도서 관리</div><div id="admin-book-manage"></div></div>
+</div>
+
+<script>
+  let users = JSON.parse(localStorage.getItem('rv_users')) || [];
+  let currentUser = JSON.parse(localStorage.getItem('rv_current')) || null;
+  let novels = JSON.parse(localStorage.getItem('rv_novels')) || [];
+  let publishedBooks = JSON.parse(localStorage.getItem('rv_books')) || [];
+  let fundHistory = JSON.parse(localStorage.getItem('rv_fund_history')) || {};
+  let reviews = JSON.parse(localStorage.getItem('rv_reviews')) || {};
+  let voteLog = JSON.parse(localStorage.getItem('rv_vote_log')) || {}; // { "생년월일_전화번호_작가ID": true }
+
+  const GOAL = 10000; const PRICE = 500;
+  const ADMIN_CONFIG = { id: "admin", pw: "kt91107361!" };
+
+  // 기기 식별자 (Browser ID) 생성 및 체크
+  if(!localStorage.getItem('rv_device_id')) {
+    localStorage.setItem('rv_device_id', 'DEV-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9));
+  }
+  const DEVICE_ID = localStorage.getItem('rv_device_id');
+
+  function showPage(id) {
+    if (id === 'admin' && (!currentUser || currentUser.id !== ADMIN_CONFIG.id)) { alert("권한 없음"); return; }
+    document.querySelectorAll('.content-layer').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('link-' + id).classList.add('active');
+    
+    if(id === 'writer') renderWriterForm();
+    if(id === 'reader') toggleReaderView('list');
+    if(id === 'published') renderPublished();
+    if(id === 'mypage') renderMyPage();
+    if(id === 'admin') renderAdminManage();
+    updateUI();
+  }
+
+  function toggleReaderView(view) {
+    const listArea = document.getElementById('reader-list-view');
+    const detailArea = document.getElementById('reader-detail-view');
+    if(view === 'list') { listArea.style.display = 'block'; detailArea.style.display = 'none'; renderNovels(); }
+    else { listArea.style.display = 'none'; detailArea.style.display = 'block'; }
+  }
+
+  function renderNovels() {
+    const list = document.getElementById('novel-list');
+    list.innerHTML = novels.length === 0 ? "<p style='text-align:center;'>원고가 없습니다.</p>" : "";
+    novels.slice().reverse().forEach(n => {
+      const div = document.createElement('div');
+      div.className = 'novel-list-item';
+      div.onclick = () => showNovelDetail(n.id);
+      div.innerHTML = `<div><span style="font-weight:800; font-size:1.1rem;">『${n.title}』</span><br><small>작가: ${n.author}</small></div><div style="font-weight:800; color:var(--text-sub);">★ ${n.stars.toLocaleString()}</div>`;
+      list.appendChild(div);
+    });
+  }
+
+  function showNovelDetail(id) {
+    const n = novels.find(x => x.id === id);
+    const per = Math.min((n.stars / GOAL) * 100, 100).toFixed(1);
+    const isFunded = currentUser && fundHistory[currentUser.id] && fundHistory[currentUser.id].includes(id);
+    const novelReviews = reviews[id] || [];
+
+    const detailContent = document.getElementById('novel-detail-content');
+    detailContent.innerHTML = `
+      <div class="card">
+        <div class="card-title">『${n.title}』 상세 정보</div>
+        <div class="progress-bg"><div class="progress-fill" style="width:${per}%"></div></div>
+        <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:800;">
+          <span>달성률 ${per}%</span>
+          <span>지원금 ${(n.stars * PRICE).toLocaleString()}원</span>
+        </div>
+        <button class="btn" style="margin-top:20px; background:var(--yellow); color:var(--navy);" onclick="vote(${n.id}, '${n.authorId}')">★ 별점 주기 (펀딩)</button>
+      </div>
+      ${isFunded ? `
+        <div class="card">
+          <div class="card-title">원고 전문</div>
+          <div class="novel-body">${n.content}</div>
+        </div>
+        <div class="card">
+          <div class="card-title">독자 서평</div>
+          <div style="display:flex; gap:10px; margin-bottom:20px;">
+            <input type="text" id="rev-input" placeholder="한 줄 서평을 남겨주세요.">
+            <button class="btn btn-sm" onclick="addReview(${n.id})">등록</button>
+          </div>
+          <div id="review-list-area">
+            ${novelReviews.map(r => `<div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>`).reverse().join('')}
+          </div>
+        </div>
+      ` : `
+        <div class="card" style="text-align:center; border: 2px dashed var(--border);"><p>🔒 펀딩 참여 후 모든 내용을 볼 수 있습니다.</p></div>
+      `}
+    `;
+    toggleReaderView('detail');
+  }
+
+  // 중복 투표 방지 핵심 로직
+  function vote(novelId, authorId) {
+    if(!currentUser || currentUser.role !== 'reader') return alert("독자 회원만 펀딩할 수 있습니다.");
+    
+    // 1. 정보 기반 중복 체크 (생년월일 + 전화번호 + 작가ID)
+    const voteKey = `${currentUser.birth}_${currentUser.phone}_${authorId}`;
+    if(voteLog[voteKey]) return alert("부정 투표 방지: 이미 이 작가님에게 투표하셨습니다. (1인 1작가 1회 제한)");
+
+    const i = novels.findIndex(n => n.id === novelId); 
+    novels[i].stars += 1;
+    voteLog[voteKey] = true;
+
+    if(!fundHistory[currentUser.id]) fundHistory[currentUser.id] = [];
+    if(!fundHistory[currentUser.id].includes(novelId)) fundHistory[currentUser.id].push(novelId);
+    
+    localStorage.setItem('rv_novels', JSON.stringify(novels));
+    localStorage.setItem('rv_fund_history', JSON.stringify(fundHistory));
+    localStorage.setItem('rv_vote_log', JSON.stringify(voteLog));
+    
+    alert("소중한 한 표 감사합니다!");
+    showNovelDetail(novelId);
+  }
+
+  function addReview(novelId) {
+    const input = document.getElementById('rev-input');
+    if(!input.value.trim()) return alert("내용 입력");
+    if(!reviews[novelId]) reviews[novelId] = [];
+    reviews[novelId].push({ author: currentUser.name, authorId: currentUser.id, text: input.value });
+    localStorage.setItem('rv_reviews', JSON.stringify(reviews));
+    showNovelDetail(novelId);
+  }
+
+  function renderMyPage() {
+    const area = document.getElementById('mypage-content');
+    if(!currentUser) return area.innerHTML = "로그인 필요";
+    
+    if(currentUser.role === 'writer') {
+      const myNovels = novels.filter(n => n.authorId === currentUser.id);
+      area.innerHTML = `<h4>나의 투고 원고 (${myNovels.length})</h4>`;
+      myNovels.forEach(n => { area.innerHTML += `<div class="novel-list-item" style="cursor:default"><div><b>${n.title}</b></div><div>★ ${n.stars}</div></div>`; });
+    } else {
+      let myReviewsCount = 0;
+      let reviewHtml = `<h4>내가 작성한 서평</h4>`;
+      Object.keys(reviews).forEach(novelId => {
+        const novel = novels.find(x => x.id == novelId);
+        reviews[novelId].forEach(r => {
+          if(r.authorId === currentUser.id) {
+            myReviewsCount++;
+            reviewHtml += `<div class="review-item"><b>[${novel ? novel.title : '원고'}]</b> ${r.text}</div>`;
+          }
+        });
+      });
+      area.innerHTML = myReviewsCount === 0 ? "<p>기록 없음</p>" : reviewHtml;
+    }
+  }
+
+  function renderAuthUI() {
+    const area = document.getElementById('auth-ui');
+    if(currentUser) { area.innerHTML = `<div style="text-align:center; padding:10px;">반갑습니다, ${currentUser.name}님.</div>`; }
+    else { area.innerHTML = `<div class="card" style="max-width:400px; margin:0 auto;"><input type="text" id="li-id" placeholder="ID"><input type="password" id="li-pw" placeholder="PW"><button class="btn" onclick="login()">LOGIN</button><hr style="margin:20px 0; border:0; border-top:1px solid #eee;"><select id="rg-role"><option value="writer">작가 가입</option><option value="reader">독자 가입</option></select><input type="text" id="rg-id" placeholder="ID"><input type="password" id="rg-pw" placeholder="PW"><input type="text" id="rg-name" placeholder="Name"><input type="text" id="rg-birth" placeholder="생년월일 8자리 (19900101)"><input type="text" id="rg-phone" placeholder="휴대폰 번호 (-없이 숫자만)"><button class="btn" style="background:#eee; color:#333;" onclick="signup()">JOIN</button></div>`; }
+  }
+
+  function signup() {
+    const role = document.getElementById('rg-role').value; const id = document.getElementById('rg-id').value;
+    const pw = document.getElementById('rg-pw').value; const name = document.getElementById('rg-name').value;
+    const birth = document.getElementById('rg-birth').value; const phone = document.getElementById('rg-phone').value;
+    
+    if(!id || !pw || !name || birth.length !== 8 || !phone) return alert("가입 정보를 모두 정확히 입력하세요.");
+    
+    // 전화번호/생년월일 중복 가입 방지 로직
+    if(users.find(u => u.phone === phone && u.birth === birth)) return alert("이미 동일한 정보로 가입된 계정이 있습니다.");
+    if(users.find(u => u.id === id)) return alert("중복된 아이디입니다.");
+
+    users.push({id, pw, name, role, birth, phone, deviceId: DEVICE_ID});
+    localStorage.setItem('rv_users', JSON.stringify(users)); alert("환영합니다! 가입이 완료되었습니다."); renderAuthUI();
+  }
+
+  function login() {
+    const id = document.getElementById('li-id').value; const pw = document.getElementById('li-pw').value;
+    if(id === ADMIN_CONFIG.id && pw === ADMIN_CONFIG.pw) currentUser = { id: 'admin', name: '관리자', role: 'admin' };
+    else { const user = users.find(u => u.id === id && u.pw === pw); if(!user) return alert("오류"); currentUser = user; }
+    localStorage.setItem('rv_current', JSON.stringify(currentUser)); showPage('home');
+  }
+
+  function updateUI() {
+    const nav = document.getElementById('auth-nav');
+    if(currentUser) { nav.innerHTML = `${currentUser.name}님 <button class="logout-btn" onclick="logout()">[LOGOUT]</button>`; document.getElementById('link-admin').style.display = (currentUser.id === ADMIN_CONFIG.id) ? 'inline-block' : 'none'; }
+    else { nav.innerHTML = "LOGIN"; document.getElementById('link-admin').style.display = 'none'; }
+    if(document.getElementById('home').classList.contains('active')) renderAuthUI();
+  }
+  function logout() { currentUser = null; localStorage.removeItem('rv_current'); showPage('home'); }
+  function renderWriterForm() { const area = document.getElementById('writer-form-area'); if(!currentUser || currentUser.role !== 'writer') { area.innerHTML = "<p>작가 전용</p>"; return; } area.innerHTML = `<input type="text" id="wt-title" placeholder="제목"><textarea id="wt-content" rows="10" placeholder="내용"></textarea><button class="btn" onclick="saveNovel()">게시</button>`; }
+  function saveNovel() { novels.push({ id: Date.now(), author: currentUser.name, authorId: currentUser.id, title: document.getElementById('wt-title').value, content: document.getElementById('wt-content').value, stars: 0 }); localStorage.setItem('rv_novels', JSON.stringify(novels)); showPage('reader'); }
+  function renderPublished() { const grid = document.getElementById('published-grid'); grid.innerHTML = publishedBooks.length === 0 ? "없음" : publishedBooks.map(b => `<div class="book-card"><div class="book-img-wrapper"><img src="${b.img}"></div><h3>${b.title}</h3></div>`).join(''); }
+  function renderAdminManage() { const area = document.getElementById('admin-book-manage'); area.innerHTML = publishedBooks.length === 0 ? "도서 없음" : publishedBooks.map((b, idx) => `<div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;"><span>${b.title}</span><button class="btn btn-sm" style="background:var(--red); color:#fff;" onclick="deleteBook(${idx})">삭제</button></div>`).join(''); }
+  function deleteBook(idx) { if(confirm("삭제?")) { publishedBooks.splice(idx, 1); localStorage.setItem('rv_books', JSON.stringify(publishedBooks)); renderAdminManage(); } }
+  function addPublishedBook() { const t = document.getElementById('pub-title').value; const m = document.getElementById('pub-img-data').value; if(!t || !m) return alert("정보"); publishedBooks.push({ title: t, img: m }); localStorage.setItem('rv_books', JSON.stringify(publishedBooks)); showPage('published'); }
+  function processLeave() { if(confirm("탈퇴?")) { users = users.filter(u => u.id !== currentUser.id); localStorage.setItem('rv_users', JSON.stringify(users)); logout(); } }
+  function optimizeAndPreview(input) { const file = input.files[0]; if(!file) return; const reader = new FileReader(); reader.onload = e => { const img = new Image(); img.onload = () => { const canvas = document.createElement('canvas'); let w = img.width, h = img.height, max = 800; if(w > h) { if(w > max) { h *= max/w; w = max; } } else { if(h > max) { w *= max/h; h = max; } } canvas.width = w; canvas.height = h; canvas.getContext('2d').drawImage(img, 0, 0, w, h); document.getElementById('pub-img-data').value = canvas.toDataURL('image/jpeg', 0.8); document.getElementById('file-name').innerText = "OK"; }; img.src = e.target.result; }; reader.readAsDataURL(file); }
+
+  showPage('home');
+</script>
+</body>
+</html>
