@@ -27,21 +27,17 @@
     header h1 { font-size: 2.5rem; margin: 0; color: var(--yellow); letter-spacing: 8px; font-weight: 800; }
     header p { opacity: 0.8; margin-top: 15px; font-size: 0.9rem; letter-spacing: 2px; }
 
-    /* 레이어 설정 */
     .content-layer { display: none; max-width: 1000px; margin: 40px auto; padding: 0 20px; flex: 1; }
     .content-layer.active { display: block; animation: fadeInUp 0.4s ease-out; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* 카드 디자인 */
     .card { background: var(--white); border: 1px solid var(--border); border-radius: 0; padding: 40px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .card-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 25px; border-bottom: 2px solid var(--navy); padding-bottom: 10px; display: inline-block; }
 
-    /* 브랜드 슬로건 섹션 */
     .brand-intro { text-align: center; margin: 40px 0 60px 0; word-break: keep-all; }
     .brand-intro h2 { font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 20px; letter-spacing: -0.5px; }
     .brand-intro p { max-width: 650px; margin: 0 auto; color: var(--text-sub); font-size: 1rem; line-height: 1.9; }
 
-    /* [복구] 프로세스 도표 디자인 (격자 무늬 살림) */
     .process-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 20px; border: 1px solid var(--navy); }
     .process-step { padding: 40px 20px; border-right: 1px solid var(--navy); position: relative; transition: all 0.3s ease; background: #fff; overflow: hidden; text-align: left; }
     .process-step:last-child { border-right: none; }
@@ -55,13 +51,11 @@
         .process-step:last-child::after { content: '↺'; font-size: 1.5rem; }
     }
 
-    /* 푸터 - 하단 정보 */
     footer { background: #EAEAEA; color: #555; padding: 50px 20px; font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 60px; }
     .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
     .info-group { line-height: 2; }
     .info-label { font-weight: 800; color: var(--navy); margin-right: 8px; }
 
-    /* 기타 UI 요소 */
     .novel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 1px solid var(--border); margin-bottom: 15px; cursor: pointer; transition: 0.3s; background: #fff; }
     .novel-list-item:hover { border-color: var(--navy); transform: translateX(5px); }
     .progress-bg { background: #eee; height: 10px; border-radius: 5px; overflow: hidden; margin: 20px 0; }
@@ -76,6 +70,8 @@
     input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); font-family: inherit; outline: none; }
     .btn { background: var(--navy); color: var(--yellow); border: none; padding: 15px 30px; font-weight: 800; cursor: pointer; transition: 0.3s; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
     .btn:hover { background: #1a3a6d; color: #fff; }
+    .btn-sm { padding: 8px 16px; font-size: 0.8rem; width: auto; }
+    .review-item { font-size: 0.9rem; padding: 15px; background: #f9f9f9; border: 1px solid var(--border); margin-bottom: 10px; }
   </style>
 </head>
 <body>
@@ -99,7 +95,6 @@
 
 <div id="home" class="content-layer active">
   <div id="auth-ui"></div>
-  
   <section class="brand-intro">
     <h2>라이터(Writer)와 리더(Reader)를 잇다</h2>
     <p>
@@ -108,30 +103,13 @@
       작가의 고독한 투쟁(Rival)이 독자의 손길을 통해 새로운 생명(Revival)으로 태어나는 선순환의 기록, 그 여정에 함께하세요.
     </p>
   </section>
-
   <div class="card">
     <div class="card-title">CIRCULATION PROCESS</div>
     <div class="process-container">
-      <div class="process-step">
-        <div class="step-num">01</div>
-        <div class="step-title">투고 (SUBMIT)</div>
-        <div class="step-desc">작가의 고유한 영감이 담긴 원고를 투고합니다.</div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <div class="step-title">검증 (VERIFY)</div>
-        <div class="step-desc">큐레이터들의 안목으로 문장의 가치를 검증받습니다.</div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <div class="step-title">펀딩 (FUND)</div>
-        <div class="step-desc">독자들의 지지로 도서 출판을 위한 동력을 얻습니다.</div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <div class="step-title">부활 (REVIVAL)</div>
-        <div class="step-desc">마침내 실체화된 문장은 다시 새로운 영감의 씨앗이 됩니다.</div>
-      </div>
+      <div class="process-step"><div class="step-num">01</div><div class="step-title">투고 (SUBMIT)</div><div class="step-desc">작가의 고유한 영감이 담긴 원고를 투고합니다.</div></div>
+      <div class="process-step"><div class="step-num">02</div><div class="step-title">검증 (VERIFY)</div><div class="step-desc">큐레이터들의 안목으로 문장의 가치를 검증받습니다.</div></div>
+      <div class="process-step"><div class="step-num">03</div><div class="step-title">펀딩 (FUND)</div><div class="step-desc">독자들의 지지로 도서 출판을 위한 동력을 얻습니다.</div></div>
+      <div class="process-step"><div class="step-num">04</div><div class="step-title">부활 (REVIVAL)</div><div class="step-desc">마침내 실체화된 문장은 다시 새로운 영감의 씨앗이 됩니다.</div></div>
     </div>
   </div>
 </div>
@@ -182,7 +160,6 @@
 </footer>
 
 <script>
-  /* 데이터 및 로직 스크립트 (이전과 동일) */
   let users = JSON.parse(localStorage.getItem('rv_users')) || [];
   let currentUser = JSON.parse(localStorage.getItem('rv_current')) || null;
   let novels = JSON.parse(localStorage.getItem('rv_novels')) || [];
@@ -200,7 +177,6 @@
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.getElementById('link-' + id).classList.add('active');
-    
     if(id === 'writer') renderWriterForm();
     if(id === 'reader') toggleReaderView('list');
     if(id === 'published') renderPublished();
@@ -247,23 +223,33 @@
         </div>
         <button class="btn" style="margin-top:20px; background:var(--yellow); color:var(--navy);" onclick="vote(${n.id}, '${n.authorId}')">VOTE FOR PUBLISHING</button>
       </div>
+
+      <div class="card">
+        <div class="card-title">READER REVIEWS</div>
+        ${isFunded ? `
+          <div style="display:flex; gap:10px; margin-bottom:30px;">
+            <input type="text" id="rev-input" placeholder="한 줄 서평을 입력하세요.">
+            <button class="btn btn-sm" onclick="addReview(${n.id})" style="width:80px; padding:10px;">ADD</button>
+          </div>
+        ` : `
+          <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:20px;">* 펀딩(투표)에 참여하신 분만 서평을 작성할 수 있습니다.</p>
+        `}
+        <div id="review-list-area">
+          ${novelReviews.length > 0 ? 
+            novelReviews.map(r => `<div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>`).reverse().join('') : 
+            "<p style='text-align:center; color:#999;'>첫 서평을 기다리고 있습니다.</p>"}
+        </div>
+      </div>
+
       ${isFunded ? `
         <div class="card">
           <div class="card-title">MANUSCRIPT</div>
           <div class="novel-body">${n.content}</div>
         </div>
-        <div class="card">
-          <div class="card-title">READER REVIEWS</div>
-          <div style="display:flex; gap:10px; margin-bottom:30px;">
-            <input type="text" id="rev-input" placeholder="한 줄 서평을 입력하세요.">
-            <button class="btn btn-sm" onclick="addReview(${n.id})" style="width:80px; padding:10px;">ADD</button>
-          </div>
-          <div id="review-list-area">
-            ${novelReviews.map(r => `<div class="review-item" style="padding:10px; border-bottom:1px solid #eee;"><strong>${r.author}:</strong> ${r.text}</div>`).reverse().join('')}
-          </div>
-        </div>
       ` : `
-        <div class="card" style="text-align:center; border: 2px dashed var(--border);"><p>🔒 펀딩(별점 주기) 참여 후 원고 전문과 서평을 보실 수 있습니다.</p></div>
+        <div class="card" style="text-align:center; border: 2px dashed var(--border); background:#fcfcfc;">
+          <p>🔒 펀딩(별점 주기) 참여 후 원고 전문을 감상하실 수 있습니다.</p>
+        </div>
       `}
     `;
     toggleReaderView('detail');
@@ -313,7 +299,7 @@
       let myReviewsCount = 0;
       let reviewHtml = `<h4>MY REVIEWS</h4>`;
       Object.keys(reviews).forEach(novelId => {
-        reviews[novelId].forEach(r => { if(r.authorId === currentUser.id) { myReviewsCount++; reviewHtml += `<div style="padding:10px; border-bottom:1px solid #eee;">${r.text}</div>`; } });
+        reviews[novelId].forEach(r => { if(r.authorId === currentUser.id) { myReviewsCount++; reviewHtml += `<div class="review-item"><b>[${novels.find(x=>x.id==novelId)?.title}]</b> ${r.text}</div>`; } });
       });
       area.innerHTML = myReviewsCount === 0 ? "<p>No reviews yet.</p>" : reviewHtml;
     }
