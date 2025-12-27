@@ -36,26 +36,19 @@
     .card { background: var(--white); border: 1px solid var(--border); border-radius: 0; padding: 40px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .card-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 25px; border-bottom: 2px solid var(--navy); padding-bottom: 10px; display: inline-block; }
 
-    /* 브랜드 아이덴티티 섹션 - 문구 수정됨 */
+    /* 브랜드 슬로건 섹션 */
     .brand-intro { text-align: center; margin: 40px 0 60px 0; word-break: keep-all; }
     .brand-intro h2 { font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 20px; letter-spacing: -0.5px; }
     .brand-intro p { max-width: 650px; margin: 0 auto; color: var(--text-sub); font-size: 1rem; line-height: 1.9; }
 
-    /* 프로세스 도표 디자인 */
-    .process-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 20px; border: 1px solid var(--navy); }
-    .process-step { padding: 40px 20px; border-right: 1px solid var(--navy); position: relative; transition: all 0.3s ease; background: #fff; overflow: hidden; }
-    .process-step:last-child { border-right: none; }
-    .process-step:hover { background: var(--navy); color: var(--yellow); }
-    .process-step .step-num { font-size: 3rem; font-weight: 800; opacity: 0.1; position: absolute; top: -10px; left: 10px; }
-    .process-step .step-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 10px; position: relative; }
-    .process-step .step-desc { font-size: 0.85rem; line-height: 1.5; word-break: keep-all; }
-    
-    @media (min-width: 769px) {
-        .process-step::after { content: '→'; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-weight: 800; opacity: 0.3; }
-        .process-step:last-child::after { content: '↺'; font-size: 1.5rem; }
-    }
+    /* 프로세스 도표 - 한 줄 배열 */
+    .process-line { display: flex; gap: 15px; text-align: center; flex-wrap: wrap; }
+    .process-item { flex: 1; min-width: 180px; padding: 25px 15px; border: 1px solid var(--border); background: #fff; transition: 0.3s; }
+    .process-item:hover { border-color: var(--navy); background: #fafafa; }
+    .process-item b { display: block; font-size: 1.1rem; color: var(--navy); margin-bottom: 10px; }
+    .process-item span { font-size: 0.8rem; color: var(--text-sub); display: block; line-height: 1.4; }
 
-    /* 푸터 - 책임자 정보 기재 */
+    /* 푸터 - 하단 정보 */
     footer { background: #EAEAEA; color: #555; padding: 50px 20px; font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 60px; }
     .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
     .info-group { line-height: 2; }
@@ -111,28 +104,12 @@
   </section>
 
   <div class="card">
-    <div class="card-title">CIRCULATION PROCESS</div>
-    <div class="process-container">
-      <div class="process-step">
-        <div class="step-num">01</div>
-        <div class="step-title">SUBMIT</div>
-        <div class="step-desc">작가의 고유한 영감이 담긴 원고를 투고합니다.</div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <div class="step-title">VERIFY</div>
-        <div class="step-desc">큐레이터들의 안목으로 문장의 가치를 검증받습니다.</div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <div class="step-title">FUND</div>
-        <div class="step-desc">독자들의 지지로 도서 출판을 위한 동력을 얻습니다.</div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <div class="step-title">REVIVAL</div>
-        <div class="step-desc">마침내 실체화된 문장은 다시 새로운 영감의 씨앗이 됩니다.</div>
-      </div>
+    <div class="card-title">PROCESS</div>
+    <div class="process-line">
+      <div class="process-item"><b>01 투고</b><span>작가의 고유한 영감이 담긴 원고를 투고합니다.</span></div>
+      <div class="process-item"><b>02 검증</b><span>큐레이터들의 안목으로 문장의 가치를 검증받습니다.</span></div>
+      <div class="process-item"><b>03 펀딩</b><span>독자들의 지지로 도서 출판을 위한 동력을 얻습니다.</span></div>
+      <div class="process-item"><b>04 출판</b><span>마침내 실체화된 문장은 다시 새로운 씨앗이 됩니다.</span></div>
     </div>
   </div>
 </div>
@@ -183,7 +160,6 @@
 </footer>
 
 <script>
-  /* 데이터 초기화 */
   let users = JSON.parse(localStorage.getItem('rv_users')) || [];
   let currentUser = JSON.parse(localStorage.getItem('rv_current')) || null;
   let novels = JSON.parse(localStorage.getItem('rv_novels')) || [];
@@ -195,7 +171,6 @@
   const GOAL = 10000; const PRICE = 500;
   const ADMIN_CONFIG = { id: "admin", pw: "kt91107361!" };
 
-  /* 페이지 전환 함수 */
   function showPage(id) {
     if (id === 'admin' && (!currentUser || currentUser.id !== ADMIN_CONFIG.id)) { alert("권한 없음"); return; }
     document.querySelectorAll('.content-layer').forEach(l => l.classList.remove('active'));
