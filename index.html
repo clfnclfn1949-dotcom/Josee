@@ -14,7 +14,6 @@
     * { box-sizing: border-box; }
     body { background: var(--bg); font-family: 'Nanum Gothic', sans-serif; margin: 0; color: var(--text-main); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
     
-    /* 네비게이션 */
     nav { background: var(--navy); display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; position: sticky; top: 0; z-index: 1000; }
     .nav-links { display: flex; gap: 20px; }
     .nav-links a { color: var(--white); text-decoration: none; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
@@ -22,7 +21,6 @@
     .user-info { color: rgba(255, 201, 71, 0.4); font-size: 0.45rem; display: flex; align-items: center; gap: 5px; }
     .logout-btn { background: none; border: none; color: rgba(255, 255, 255, 0.3); cursor: pointer; font-size: 0.4rem; text-decoration: underline; padding: 0; }
 
-    /* 헤더 */
     header { background: var(--navy); color: var(--white); padding: 60px 20px; text-align: center; border-bottom: 8px solid var(--yellow); }
     header h1 { font-size: 2.5rem; margin: 0; color: var(--yellow); letter-spacing: 8px; font-weight: 800; }
     header p { opacity: 0.8; margin-top: 15px; font-size: 0.9rem; letter-spacing: 2px; }
@@ -39,18 +37,11 @@
     .brand-intro p { max-width: 650px; margin: 0 auto; color: var(--text-sub); font-size: 1rem; line-height: 1.9; }
 
     .process-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 20px; border: 1px solid var(--navy); }
-    .process-step { padding: 40px 20px; border-right: 1px solid var(--navy); position: relative; transition: all 0.3s ease; background: #fff; overflow: hidden; text-align: left; }
-    .process-step:last-child { border-right: none; }
+    .process-step { padding: 40px 20px; border-right: 1px solid var(--navy); position: relative; transition: all 0.3s ease; background: #fff; overflow: hidden; }
     .process-step:hover { background: var(--navy); color: var(--yellow); }
     .process-step .step-num { font-size: 3rem; font-weight: 800; opacity: 0.1; position: absolute; top: -10px; left: 10px; }
     .process-step .step-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; position: relative; z-index: 2; }
-    .process-step .step-desc { font-size: 0.85rem; line-height: 1.5; word-break: keep-all; position: relative; z-index: 2; }
     
-    @media (min-width: 769px) {
-        .process-step::after { content: '→'; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-weight: 800; opacity: 0.3; }
-        .process-step:last-child::after { content: '↺'; font-size: 1.5rem; }
-    }
-
     footer { background: #EAEAEA; color: #555; padding: 50px 20px; font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 60px; }
     .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
     .info-group { line-height: 2; }
@@ -62,16 +53,20 @@
     .progress-fill { height: 100%; background: var(--navy); width: 0%; transition: 1s ease-in-out; }
     .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
     .book-card { background: var(--white); border: 1px solid var(--border); padding: 20px; text-align: center; transition: 0.3s; }
-    .book-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
     .book-img-wrapper { width: 100%; height: 380px; background-color: #fdfdfd; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #f0f0f0; }
-    .book-card img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.1)); }
-    .book-card h3 { font-size: 1rem; color: var(--navy); margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
+    .book-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
     .novel-body { background: #fff; padding: 40px; border: 1px solid var(--border); white-space: pre-wrap; font-size: 1.05rem; line-height: 2; border-left: 5px solid var(--navy); }
     input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); font-family: inherit; outline: none; }
     .btn { background: var(--navy); color: var(--yellow); border: none; padding: 15px 30px; font-weight: 800; cursor: pointer; transition: 0.3s; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
     .btn:hover { background: #1a3a6d; color: #fff; }
     .btn-sm { padding: 8px 16px; font-size: 0.8rem; width: auto; }
+    .btn-danger { background: var(--red); color: white; margin-top: 10px; }
     .review-item { font-size: 0.9rem; padding: 15px; background: #f9f9f9; border: 1px solid var(--border); margin-bottom: 10px; }
+
+    /* 별점 선택 UI */
+    .vote-control { display: flex; align-items: center; gap: 10px; margin-top: 20px; padding: 20px; background: #f4f4f4; border: 1px solid var(--border); }
+    .vote-control input[type="number"] { width: 80px; margin-bottom: 0; text-align: center; font-weight: 800; font-size: 1.1rem; }
+    .vote-info { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
   </style>
 </head>
 <body>
@@ -207,6 +202,7 @@
 
   function showNovelDetail(id) {
     const n = novels.find(x => x.id === id);
+    if(!n) return toggleReaderView('list');
     const per = Math.min((n.stars / GOAL) * 100, 100).toFixed(1);
     const isFunded = currentUser && fundHistory[currentUser.id] && fundHistory[currentUser.id].includes(id);
     const novelReviews = reviews[id] || [];
@@ -221,9 +217,15 @@
           <span>ACHIEVEMENT: ${per}%</span>
           <span>FUND: ${(n.stars * PRICE).toLocaleString()} KRW</span>
         </div>
-        <button class="btn" style="margin-top:20px; background:var(--yellow); color:var(--navy);" onclick="vote(${n.id}, '${n.authorId}')">VOTE FOR PUBLISHING</button>
+        
+        <div class="vote-control">
+          <span class="vote-info">수량 선택:</span>
+          <input type="number" id="vote-count" value="1" min="1" max="10" oninput="updateVotePrice()">
+          <span class="vote-info" id="vote-price-display">(500 KRW)</span>
+          <button class="btn btn-sm" style="margin-left:auto; background:var(--yellow); color:var(--navy);" onclick="vote(${n.id}, '${n.authorId}')">VOTE NOW</button>
+        </div>
       </div>
-
+      
       <div class="card">
         <div class="card-title">READER REVIEWS</div>
         ${isFunded ? `
@@ -231,43 +233,83 @@
             <input type="text" id="rev-input" placeholder="한 줄 서평을 입력하세요.">
             <button class="btn btn-sm" onclick="addReview(${n.id})" style="width:80px; padding:10px;">ADD</button>
           </div>
-        ` : `
-          <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:20px;">* 펀딩(투표)에 참여하신 분만 서평을 작성할 수 있습니다.</p>
-        `}
-        <div id="review-list-area">
-          ${novelReviews.length > 0 ? 
-            novelReviews.map(r => `<div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>`).reverse().join('') : 
-            "<p style='text-align:center; color:#999;'>첫 서평을 기다리고 있습니다.</p>"}
-        </div>
+        ` : `<p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:20px;">* 펀딩에 참여하신 분만 서평을 작성할 수 있습니다.</p>`}
+        <div id="review-list-area">${novelReviews.map(r => `<div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>`).reverse().join('')}</div>
       </div>
-
-      ${isFunded ? `
-        <div class="card">
-          <div class="card-title">MANUSCRIPT</div>
-          <div class="novel-body">${n.content}</div>
-        </div>
-      ` : `
-        <div class="card" style="text-align:center; border: 2px dashed var(--border); background:#fcfcfc;">
-          <p>🔒 펀딩(별점 주기) 참여 후 원고 전문을 감상하실 수 있습니다.</p>
-        </div>
-      `}
+      
+      ${isFunded ? `<div class="card"><div class="card-title">MANUSCRIPT</div><div class="novel-body">${n.content}</div></div>` : 
+      `<div class="card" style="text-align:center; border: 2px dashed var(--border);"><p>🔒 펀딩 참여 후 원고 전문을 보실 수 있습니다.</p></div>`}
     `;
     toggleReaderView('detail');
   }
 
+  /* 가격 표시 업데이트 */
+  function updateVotePrice() {
+    const count = document.getElementById('vote-count').value;
+    const display = document.getElementById('vote-price-display');
+    display.innerText = `(${(count * PRICE).toLocaleString()} KRW)`;
+  }
+
+  /* 투표 로직 수정 (다중 투표 가능) */
   function vote(novelId, authorId) {
     if(!currentUser || currentUser.role !== 'reader') return alert("독자 회원만 투표 가능합니다.");
+    
+    const count = parseInt(document.getElementById('vote-count').value);
+    if(count < 1 || count > 10) return alert("1개에서 최대 10개까지 한 번에 투표 가능합니다.");
+
     const voteKey = `${currentUser.birth}_${currentUser.phone}_${authorId}`;
     if(voteLog[voteKey]) return alert("부정 투표 방지: 이미 이 작가님에게 투표하셨습니다.");
+
     const i = novels.findIndex(n => n.id === novelId); 
-    novels[i].stars += 1;
+    novels[i].stars += count; // 선택한 수량만큼 별점 증가
     voteLog[voteKey] = true;
+
     if(!fundHistory[currentUser.id]) fundHistory[currentUser.id] = [];
     if(!fundHistory[currentUser.id].includes(novelId)) fundHistory[currentUser.id].push(novelId);
+    
     localStorage.setItem('rv_novels', JSON.stringify(novels));
     localStorage.setItem('rv_fund_history', JSON.stringify(fundHistory));
     localStorage.setItem('rv_vote_log', JSON.stringify(voteLog));
+    
+    alert(`성공적으로 ${count}개의 별을 투표했습니다!`);
     showNovelDetail(novelId);
+  }
+
+  function renderMyPage() {
+    const area = document.getElementById('mypage-content');
+    if(!currentUser) return;
+    if(currentUser.role === 'writer') {
+      const myNovels = novels.filter(n => n.authorId === currentUser.id);
+      area.innerHTML = `<h4>내가 투고한 원고 (${myNovels.length})</h4>`;
+      myNovels.forEach(n => { 
+        area.innerHTML += `
+          <div class="novel-list-item" style="cursor:default; display:block;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <b>${n.title}</b>
+              <span>★ ${n.stars}</span>
+            </div>
+            <button class="btn btn-sm btn-danger" onclick="deleteNovel(${n.id})">원고 삭제</button>
+          </div>`; 
+      });
+    } else {
+      let myReviewsCount = 0;
+      let reviewHtml = `<h4>내가 남긴 서평</h4>`;
+      Object.keys(reviews).forEach(novelId => {
+        reviews[novelId].forEach(r => { if(r.authorId === currentUser.id) { myReviewsCount++; reviewHtml += `<div class="review-item"><b>[${novels.find(x=>x.id==novelId)?.title}]</b> ${r.text}</div>`; } });
+      });
+      area.innerHTML = myReviewsCount === 0 ? "<p>No reviews yet.</p>" : reviewHtml;
+    }
+  }
+
+  function deleteNovel(id) {
+    const novel = novels.find(n => n.id === id);
+    if(!novel) return;
+    const confirmMsg = `원고 '『${novel.title}』'을 삭제하시겠습니까?\n삭제 시 별점(${novel.stars}개)이 소멸됩니다.`;
+    if(confirm(confirmMsg)) {
+      novels = novels.filter(n => n.id !== id);
+      localStorage.setItem('rv_novels', JSON.stringify(novels));
+      renderMyPage();
+    }
   }
 
   function addReview(novelId) {
@@ -286,23 +328,6 @@
         <div class="book-img-wrapper"><img src="${b.img}" alt="${b.title}"></div>
         <h3>${b.title}</h3>
       </div>`).join('');
-  }
-
-  function renderMyPage() {
-    const area = document.getElementById('mypage-content');
-    if(!currentUser) return;
-    if(currentUser.role === 'writer') {
-      const myNovels = novels.filter(n => n.authorId === currentUser.id);
-      area.innerHTML = `<h4>MY MANUSCRIPTS (${myNovels.length})</h4>`;
-      myNovels.forEach(n => { area.innerHTML += `<div class="novel-list-item" style="cursor:default"><div><b>${n.title}</b></div><div>★ ${n.stars}</div></div>`; });
-    } else {
-      let myReviewsCount = 0;
-      let reviewHtml = `<h4>MY REVIEWS</h4>`;
-      Object.keys(reviews).forEach(novelId => {
-        reviews[novelId].forEach(r => { if(r.authorId === currentUser.id) { myReviewsCount++; reviewHtml += `<div class="review-item"><b>[${novels.find(x=>x.id==novelId)?.title}]</b> ${r.text}</div>`; } });
-      });
-      area.innerHTML = myReviewsCount === 0 ? "<p>No reviews yet.</p>" : reviewHtml;
-    }
   }
 
   function updateUI() {
