@@ -61,9 +61,13 @@
     .btn:hover { background: #1a3a6d; color: #fff; }
     .btn-sm { padding: 8px 16px; font-size: 0.8rem; width: auto; }
     .btn-danger { background: var(--red); color: white; margin-top: 10px; }
-    .review-item { font-size: 0.9rem; padding: 15px; background: #f9f9f9; border: 1px solid var(--border); margin-bottom: 10px; }
 
-    /* 별점 선택 UI */
+    /* 자존심 보호를 위한 비밀 패널 스타일 */
+    .secret-vault { background: #f9f9f9; border: 2px dashed var(--navy); padding: 20px; text-align: center; margin-top: 15px; }
+    .vault-hidden { filter: blur(8px); user-select: none; transition: 0.3s; }
+    .vault-visible { filter: blur(0); }
+    .admin-blind-msg { font-size: 0.75rem; color: var(--purple); margin-top: 10px; font-style: italic; }
+
     .vote-control { display: flex; align-items: center; gap: 10px; margin-top: 20px; padding: 20px; background: #f4f4f4; border: 1px solid var(--border); }
     .vote-control input[type="number"] { width: 80px; margin-bottom: 0; text-align: center; font-weight: 800; font-size: 1.1rem; }
     .vote-info { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
@@ -96,6 +100,9 @@
       <b>RIVAL; RE;VIVAL</b>은 바우하우스의 정신을 계승합니다.<br>
       불필요한 장식을 걷어내고 문장 본연의 가치에 집중합니다.<br>
       작가의 고독한 투쟁(Rival)이 독자의 손길을 통해 새로운 생명(Revival)으로 태어나는 선순환의 기록, 그 여정에 함께하세요.
+    </p>
+    <p class="admin-blind-msg" style="font-size: 0.8rem; margin-top: 30px;">
+      "본 플랫폼은 관리자조차 실시간 수치를 열람할 수 없도록 설계되었습니다.<br>오직 작가 본인만이 자신의 투쟁을 확인할 수 있습니다."
     </p>
   </section>
   <div class="card">
@@ -137,7 +144,11 @@
     <input type="hidden" id="pub-img-data">
     <button class="btn" onclick="addPublishedBook()">REGISTER NOW</button>
   </div>
-  <div class="card"><div class="card-title">MANAGE COLLECTION</div><div id="admin-book-manage"></div></div>
+  <div class="card">
+    <div class="card-title">MANAGE COLLECTION</div>
+    <p class="admin-blind-msg">* 관리자는 작품의 리스트와 삭제 권한만 가지며, 별점 수치는 '봉인' 처리됩니다.</p>
+    <div id="admin-book-manage"></div>
+  </div>
 </div>
 
 <footer>
@@ -171,7 +182,7 @@
     document.querySelectorAll('.content-layer').forEach(l => l.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    document.getElementById('link-' + id).classList.add('active');
+    document.getElementById(link-${id}).classList.add('active');
     if(id === 'writer') renderWriterForm();
     if(id === 'reader') toggleReaderView('list');
     if(id === 'published') renderPublished();
@@ -195,7 +206,8 @@
       const div = document.createElement('div');
       div.className = 'novel-list-item';
       div.onclick = () => showNovelDetail(n.id);
-      div.innerHTML = `<div><span style="font-weight:800; font-size:1.1rem;">『${n.title}』</span><br><small>AUTHOR: ${n.author}</small></div><div style="font-weight:800; color:var(--navy);">★ ${n.stars.toLocaleString()}</div>`;
+      // 독자 리스트에서도 별점 수치를 가리고 '진행 중'으로 표시 (취향에 따라 별점 표시 유지 가능)
+      div.innerHTML = `<div><span style="font-weight:800; font-size:1.1rem;">『${n.title}』</span><br><small>AUTHOR: ${n.author}</small></div><div style="font-weight:800; color:var(--navy);">IN PROGRESS</div>`;
       list.appendChild(div);
     });
   }
@@ -212,11 +224,8 @@
       <div class="card">
         <div class="card-title">『${n.title}』 ANALYSIS</div>
         <p><strong>AUTHOR:</strong> ${n.author}</p>
+        <p style="font-size:0.8rem; color:var(--text-sub);">* 수치는 창작자 보호를 위해 비공개로 집계됩니다.</p>
         <div class="progress-bg"><div class="progress-fill" style="width:${per}%"></div></div>
-        <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:800;">
-          <span>ACHIEVEMENT: ${per}%</span>
-          <span>FUND: ${(n.stars * PRICE).toLocaleString()} KRW</span>
-        </div>
         
         <div class="vote-control">
           <span class="vote-info">수량 선택:</span>
@@ -234,7 +243,7 @@
             <button class="btn btn-sm" onclick="addReview(${n.id})" style="width:80px; padding:10px;">ADD</button>
           </div>
         ` : `<p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:20px;">* 펀딩에 참여하신 분만 서평을 작성할 수 있습니다.</p>`}
-        <div id="review-list-area">${novelReviews.map(r => `<div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>`).reverse().join('')}</div>
+        <div id="review-list-area">${novelReviews.map(r => <div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>).reverse().join('')}</div>
       </div>
       
       ${isFunded ? `<div class="card"><div class="card-title">MANUSCRIPT</div><div class="novel-body">${n.content}</div></div>` : 
@@ -243,25 +252,20 @@
     toggleReaderView('detail');
   }
 
-  /* 가격 표시 업데이트 */
   function updateVotePrice() {
     const count = document.getElementById('vote-count').value;
     const display = document.getElementById('vote-price-display');
-    display.innerText = `(${(count * PRICE).toLocaleString()} KRW)`;
+    display.innerText = (${(count * PRICE).toLocaleString()} KRW);
   }
 
-  /* 투표 로직 수정 (다중 투표 가능) */
   function vote(novelId, authorId) {
     if(!currentUser || currentUser.role !== 'reader') return alert("독자 회원만 투표 가능합니다.");
-    
     const count = parseInt(document.getElementById('vote-count').value);
-    if(count < 1 || count > 10) return alert("1개에서 최대 10개까지 한 번에 투표 가능합니다.");
-
-    const voteKey = `${currentUser.birth}_${currentUser.phone}_${authorId}`;
+    const voteKey = ${currentUser.birth}_${currentUser.phone}_${authorId};
     if(voteLog[voteKey]) return alert("부정 투표 방지: 이미 이 작가님에게 투표하셨습니다.");
 
     const i = novels.findIndex(n => n.id === novelId); 
-    novels[i].stars += count; // 선택한 수량만큼 별점 증가
+    novels[i].stars += count; 
     voteLog[voteKey] = true;
 
     if(!fundHistory[currentUser.id]) fundHistory[currentUser.id] = [];
@@ -275,6 +279,7 @@
     showNovelDetail(novelId);
   }
 
+  // 작가 본인만 숫자를 확인할 수 있는 비밀 금고 렌더링
   function renderMyPage() {
     const area = document.getElementById('mypage-content');
     if(!currentUser) return;
@@ -283,10 +288,14 @@
       area.innerHTML = `<h4>내가 투고한 원고 (${myNovels.length})</h4>`;
       myNovels.forEach(n => { 
         area.innerHTML += `
-          <div class="novel-list-item" style="cursor:default; display:block;">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <b>${n.title}</b>
-              <span>★ ${n.stars}</span>
+          <div class="novel-list-item" style="cursor:default; display:block; padding:30px;">
+            <b>『${n.title}』</b>
+            <div class="secret-vault">
+              <div id="vault-${n.id}" class="vault-hidden">
+                <span style="font-size:1.5rem; font-weight:800; color:var(--navy);">★ ${n.stars}</span>
+                <p style="margin:5px 0 0 0; font-size:0.8rem; color:var(--text-sub);">현재까지 모인 별의 개수</p>
+              </div>
+              <button class="btn btn-sm" id="btn-vault-${n.id}" style="margin-top:15px; background:var(--yellow); color:var(--navy);" onclick="unlockVault(${n.id})">데이터 잠금 해제</button>
             </div>
             <button class="btn btn-sm btn-danger" onclick="deleteNovel(${n.id})">원고 삭제</button>
           </div>`; 
@@ -295,17 +304,21 @@
       let myReviewsCount = 0;
       let reviewHtml = `<h4>내가 남긴 서평</h4>`;
       Object.keys(reviews).forEach(novelId => {
-        reviews[novelId].forEach(r => { if(r.authorId === currentUser.id) { myReviewsCount++; reviewHtml += `<div class="review-item"><b>[${novels.find(x=>x.id==novelId)?.title}]</b> ${r.text}</div>`; } });
+        reviews[novelId].forEach(r => { if(r.authorId === currentUser.id) { myReviewsCount++; reviewHtml += <div class="review-item"><b>[${novels.find(x=>x.id==novelId)?.title}]</b> ${r.text}</div>; } });
       });
       area.innerHTML = myReviewsCount === 0 ? "<p>No reviews yet.</p>" : reviewHtml;
     }
   }
 
+  function unlockVault(id) {
+    document.getElementById(vault-${id}).classList.add('vault-visible');
+    document.getElementById(btn-vault-${id}).style.display = 'none';
+  }
+
   function deleteNovel(id) {
     const novel = novels.find(n => n.id === id);
     if(!novel) return;
-    const confirmMsg = `원고 '『${novel.title}』'을 삭제하시겠습니까?\n삭제 시 별점(${novel.stars}개)이 소멸됩니다.`;
-    if(confirm(confirmMsg)) {
+    if(confirm(원고 '『${novel.title}』'을 삭제하시겠습니까?\n모든 데이터가 소멸됩니다.)) {
       novels = novels.filter(n => n.id !== id);
       localStorage.setItem('rv_novels', JSON.stringify(novels));
       renderMyPage();
@@ -333,7 +346,7 @@
   function updateUI() {
     const nav = document.getElementById('auth-nav');
     if(currentUser) {
-      nav.innerHTML = `${currentUser.name}님 <button class="logout-btn" onclick="logout()">[LOGOUT]</button>`;
+      nav.innerHTML = ${currentUser.name}님 <button class="logout-btn" onclick="logout()">[LOGOUT]</button>;
       document.getElementById('link-admin').style.display = (currentUser.id === ADMIN_CONFIG.id) ? 'inline-block' : 'none';
     } else { nav.innerHTML = "SIGN IN"; document.getElementById('link-admin').style.display = 'none'; }
     if(document.getElementById('home').classList.contains('active')) renderAuthUI();
@@ -341,7 +354,7 @@
 
   function renderAuthUI() {
     const area = document.getElementById('auth-ui');
-    if(currentUser) { area.innerHTML = `<div style="text-align:center; padding:10px; font-weight:800;">WELCOME, ${currentUser.name}.</div>`; }
+    if(currentUser) { area.innerHTML = <div style="text-align:center; padding:10px; font-weight:800;">WELCOME, ${currentUser.name}.</div>; }
     else { area.innerHTML = `<div class="card" style="max-width:400px; margin:0 auto; border-top: 4px solid var(--navy);"><input type="text" id="li-id" placeholder="ID"><input type="password" id="li-pw" placeholder="PW"><button class="btn" onclick="login()">SIGN IN</button><hr style="margin:20px 0; border:0; border-top:1px solid #eee;"><select id="rg-role"><option value="writer">ARTIST JOIN</option><option value="reader">CURATOR JOIN</option></select><input type="text" id="rg-id" placeholder="ID"><input type="password" id="rg-pw" placeholder="PW"><input type="text" id="rg-name" placeholder="NAME"><input type="text" id="rg-birth" placeholder="BIRTH (YYYYMMDD)"><input type="text" id="rg-phone" placeholder="PHONE"><button class="btn" style="background:#f4f4f4; color:#333;" onclick="signup()">CREATE ACCOUNT</button></div>`; }
   }
 
@@ -371,11 +384,22 @@
     novels.push({ id: Date.now(), author: currentUser.name, authorId: currentUser.id, title: document.getElementById('wt-title').value, content: document.getElementById('wt-content').value, stars: 0 });
     localStorage.setItem('rv_novels', JSON.stringify(novels)); showPage('reader');
   }
+  
+  // 관리자 화면에서도 별점 수치를 볼 수 없게 '봉인' 처리
   function renderAdminManage() {
     const area = document.getElementById('admin-book-manage');
-    area.innerHTML = publishedBooks.length === 0 ? "Empty" : publishedBooks.map((b, idx) => `<div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;"><span>${b.title}</span><button class="btn btn-sm" onclick="deleteBook(${idx})" style="width:60px; background:var(--red); color:#fff; border:none;">DEL</button></div>`).join('');
+    area.innerHTML = novels.length === 0 ? "Empty" : novels.map((n) => `
+      <div style="display:flex; justify-content:space-between; padding:15px; border-bottom:1px solid #eee; align-items:center;">
+        <span>『${n.title}』 - ${n.author}</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span style="font-size:0.7rem; color:var(--purple);">[수치 봉인됨]</span>
+          <button class="btn btn-sm btn-danger" onclick="deleteNovelAdmin(${n.id})">삭제</button>
+        </div>
+      </div>`).join('');
   }
-  function deleteBook(idx) { if(confirm("DEL?")) { publishedBooks.splice(idx, 1); localStorage.setItem('rv_books', JSON.stringify(publishedBooks)); renderAdminManage(); } }
+  
+  function deleteNovelAdmin(id) { if(confirm("관리자 권한으로 삭제하시겠습니까?")) { novels = novels.filter(n => n.id !== id); localStorage.setItem('rv_novels', JSON.stringify(novels)); renderAdminManage(); } }
+
   function addPublishedBook() {
     const t = document.getElementById('pub-title').value; const m = document.getElementById('pub-img-data').value;
     if(!t || !m) return; publishedBooks.push({ title: t, img: m });
