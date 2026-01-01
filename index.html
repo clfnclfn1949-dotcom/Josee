@@ -18,8 +18,8 @@
     .nav-links { display: flex; gap: 20px; }
     .nav-links a { color: var(--white); text-decoration: none; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
     .nav-links a.active, .nav-links a:hover { color: var(--yellow); }
-    .user-info { color: rgba(255, 201, 71, 0.4); font-size: 0.45rem; display: flex; align-items: center; gap: 5px; }
-    .logout-btn { background: none; border: none; color: rgba(255, 255, 255, 0.3); cursor: pointer; font-size: 0.4rem; text-decoration: underline; padding: 0; }
+    .user-info { color: rgba(255, 201, 71, 0.8); font-size: 0.75rem; display: flex; align-items: center; gap: 10px; }
+    .logout-btn { background: none; border: 1px solid rgba(255, 255, 255, 0.3); color: white; cursor: pointer; font-size: 0.6rem; padding: 2px 5px; border-radius: 3px; }
 
     header { background: var(--navy); color: var(--white); padding: 60px 20px; text-align: center; border-bottom: 8px solid var(--yellow); }
     header h1 { font-size: 2.5rem; margin: 0; color: var(--yellow); letter-spacing: 8px; font-weight: 800; }
@@ -40,37 +40,36 @@
     .process-step { padding: 40px 20px; border-right: 1px solid var(--navy); position: relative; transition: all 0.3s ease; background: #fff; overflow: hidden; }
     .process-step:hover { background: var(--navy); color: var(--yellow); }
     .process-step .step-num { font-size: 3rem; font-weight: 800; opacity: 0.1; position: absolute; top: -10px; left: 10px; }
-    .process-step .step-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; position: relative; z-index: 2; }
     
-    footer { background: #EAEAEA; color: #555; padding: 50px 20px; font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 60px; }
-    .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
-    .info-group { line-height: 2; }
-    .info-label { font-weight: 800; color: var(--navy); margin-right: 8px; }
-
     .novel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 1px solid var(--border); margin-bottom: 15px; cursor: pointer; transition: 0.3s; background: #fff; }
     .novel-list-item:hover { border-color: var(--navy); transform: translateX(5px); }
+    
     .progress-bg { background: #eee; height: 10px; border-radius: 5px; overflow: hidden; margin: 20px 0; }
     .progress-fill { height: 100%; background: var(--navy); width: 0%; transition: 1s ease-in-out; }
+    
+    /* 비밀 금고 스타일 */
+    .secret-vault { background: #f9f9f9; border: 2px dashed var(--navy); padding: 20px; text-align: center; margin-top: 15px; margin-bottom: 15px; }
+    .vault-hidden { filter: blur(8px); user-select: none; transition: 0.5s; opacity: 0.3; }
+    .vault-visible { filter: blur(0); opacity: 1; }
+    .admin-blind-msg { font-size: 0.75rem; color: var(--purple); margin-top: 10px; font-style: italic; }
+
     .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
     .book-card { background: var(--white); border: 1px solid var(--border); padding: 20px; text-align: center; transition: 0.3s; }
     .book-img-wrapper { width: 100%; height: 380px; background-color: #fdfdfd; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #f0f0f0; }
     .book-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .novel-body { background: #fff; padding: 40px; border: 1px solid var(--border); white-space: pre-wrap; font-size: 1.05rem; line-height: 2; border-left: 5px solid var(--navy); }
+    
     input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); font-family: inherit; outline: none; }
     .btn { background: var(--navy); color: var(--yellow); border: none; padding: 15px 30px; font-weight: 800; cursor: pointer; transition: 0.3s; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
     .btn:hover { background: #1a3a6d; color: #fff; }
     .btn-sm { padding: 8px 16px; font-size: 0.8rem; width: auto; }
     .btn-danger { background: var(--red); color: white; margin-top: 10px; }
 
-    /* 자존심 보호를 위한 비밀 패널 스타일 */
-    .secret-vault { background: #f9f9f9; border: 2px dashed var(--navy); padding: 20px; text-align: center; margin-top: 15px; }
-    .vault-hidden { filter: blur(8px); user-select: none; transition: 0.3s; }
-    .vault-visible { filter: blur(0); }
-    .admin-blind-msg { font-size: 0.75rem; color: var(--purple); margin-top: 10px; font-style: italic; }
-
     .vote-control { display: flex; align-items: center; gap: 10px; margin-top: 20px; padding: 20px; background: #f4f4f4; border: 1px solid var(--border); }
     .vote-control input[type="number"] { width: 80px; margin-bottom: 0; text-align: center; font-weight: 800; font-size: 1.1rem; }
-    .vote-info { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+    
+    footer { background: #EAEAEA; color: #555; padding: 50px 20px; font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 60px; }
+    .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+    .info-label { font-weight: 800; color: var(--navy); margin-right: 8px; }
   </style>
 </head>
 <body>
@@ -93,7 +92,8 @@
 </header>
 
 <div id="home" class="content-layer active">
-  <div id="auth-ui"></div>
+  <div id="auth-ui" style="margin-bottom: 40px;"></div>
+
   <section class="brand-intro">
     <h2>라이터(Writer)와 리더(Reader)를 잇다</h2>
     <p>
@@ -105,26 +105,24 @@
       "본 플랫폼은 관리자조차 실시간 수치를 열람할 수 없도록 설계되었습니다.<br>오직 작가 본인만이 자신의 투쟁을 확인할 수 있습니다."
     </p>
   </section>
+
   <div class="card">
     <div class="card-title">CIRCULATION PROCESS</div>
     <div class="process-container">
-      <div class="process-step"><div class="step-num">01</div><div class="step-title">투고 (SUBMIT)</div><div class="step-desc">작가의 고유한 영감이 담긴 원고를 투고합니다.</div></div>
-      <div class="process-step"><div class="step-num">02</div><div class="step-title">검증 (VERIFY)</div><div class="step-desc">큐레이터들의 안목으로 문장의 가치를 검증받습니다.</div></div>
-      <div class="process-step"><div class="step-num">03</div><div class="step-title">펀딩 (FUND)</div><div class="step-desc">독자들의 지지로 도서 출판을 위한 동력을 얻습니다.</div></div>
-      <div class="process-step"><div class="step-num">04</div><div class="step-title">부활 (REVIVAL)</div><div class="step-desc">마침내 실체화된 문장은 다시 새로운 영감의 씨앗이 됩니다.</div></div>
+      <div class="process-step"><div class="step-num">01</div><div class="step-title" style="font-weight:800;">투고 (SUBMIT)</div><div class="step-desc">작가의 고유한 영감이 담긴 원고를 투고합니다.</div></div>
+      <div class="process-step"><div class="step-num">02</div><div class="step-title" style="font-weight:800;">검증 (VERIFY)</div><div class="step-desc">큐레이터들의 안목으로 문장의 가치를 검증받습니다.</div></div>
+      <div class="process-step"><div class="step-num">03</div><div class="step-title" style="font-weight:800;">펀딩 (FUND)</div><div class="step-desc">독자들의 지지로 도서 출판을 위한 동력을 얻습니다.</div></div>
+      <div class="process-step"><div class="step-num">04</div><div class="step-title" style="font-weight:800;">부활 (REVIVAL)</div><div class="step-desc">마침내 실체화된 문장은 다시 새로운 영감의 씨앗이 됩니다.</div></div>
     </div>
   </div>
 </div>
 
 <div id="reader" class="content-layer">
   <div id="reader-list-view">
-    <div class="card">
-      <div class="card-title">CURATION LIST</div>
-      <div id="novel-list"></div>
-    </div>
+    <div class="card"><div class="card-title">CURATION LIST</div><div id="novel-list"></div></div>
   </div>
   <div id="reader-detail-view" style="display:none;">
-    <div onclick="toggleReaderView('list')" style="cursor:pointer; margin-bottom:20px; font-weight:800; font-size:0.9rem;">← BACK TO LIST</div>
+    <div onclick="toggleReaderView('list')" style="cursor:pointer; margin-bottom:20px; font-weight:800;">← BACK TO LIST</div>
     <div id="novel-detail-content"></div>
   </div>
 </div>
@@ -137,16 +135,13 @@
   <div class="card">
     <div class="card-title" style="color:var(--purple);">REGISTER COLLECTION</div>
     <input type="text" id="pub-title" placeholder="도서 제목">
-    <div style="border: 2px dashed var(--border); padding: 30px; text-align: center; cursor: pointer; margin-bottom: 20px;" onclick="document.getElementById('pub-file').click()">
-      <span id="file-name">표지 이미지 업로드</span>
-      <input type="file" id="pub-file" accept="image/*" style="display:none" onchange="optimizeAndPreview(this)">
-    </div>
+    <input type="file" id="pub-file" accept="image/*" style="margin-bottom:10px;" onchange="optimizeAndPreview(this)">
     <input type="hidden" id="pub-img-data">
-    <button class="btn" onclick="addPublishedBook()">REGISTER NOW</button>
+    <button class="btn" onclick="addPublishedBook()">REGISTER</button>
   </div>
   <div class="card">
-    <div class="card-title">MANAGE COLLECTION</div>
-    <p class="admin-blind-msg">* 관리자는 작품의 리스트와 삭제 권한만 가지며, 별점 수치는 '봉인' 처리됩니다.</p>
+    <div class="card-title">MANAGE MANUSCRIPTS</div>
+    <p class="admin-blind-msg">* 관리자는 수치를 볼 수 없으며, 작품 관리만 가능합니다.</p>
     <div id="admin-book-manage"></div>
   </div>
 </div>
@@ -154,24 +149,19 @@
 <footer>
   <div class="footer-content">
     <div class="info-group">
-      <span class="info-label">책임관리자:</span> 이정윤<br>
-      <span class="info-label">주소:</span> 진주시 신안로 88번길 14<br>
-      <span class="info-label">연락처:</span> 010-5860-4948
+      <span class="info-label">책임관리자:</span> 이정윤 | <span class="info-label">연락처:</span> 010-5860-4948
     </div>
-    <div class="info-group" style="text-align: right;">
-      <span class="info-label">직위:</span> 홈페이지 제작자<br>
-      <span style="opacity: 0.6;">© 2025 RIVAL; REVIVAL. All rights reserved.</span>
-    </div>
+    <div class="info-group">© 2025 RIVAL; REVIVAL.</div>
   </div>
 </footer>
 
 <script>
+  // 초기 데이터 로드
   let users = JSON.parse(localStorage.getItem('rv_users')) || [];
   let currentUser = JSON.parse(localStorage.getItem('rv_current')) || null;
   let novels = JSON.parse(localStorage.getItem('rv_novels')) || [];
   let publishedBooks = JSON.parse(localStorage.getItem('rv_books')) || [];
   let fundHistory = JSON.parse(localStorage.getItem('rv_fund_history')) || {};
-  let reviews = JSON.parse(localStorage.getItem('rv_reviews')) || {};
   let voteLog = JSON.parse(localStorage.getItem('rv_vote_log')) || {};
 
   const GOAL = 10000; const PRICE = 500;
@@ -182,248 +172,174 @@
     document.querySelectorAll('.content-layer').forEach(l => l.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    document.getElementById(link-${id}).classList.add('active');
+    document.getElementById('link-' + id).classList.add('active');
+    
     if(id === 'writer') renderWriterForm();
     if(id === 'reader') toggleReaderView('list');
     if(id === 'published') renderPublished();
     if(id === 'mypage') renderMyPage();
     if(id === 'admin') renderAdminManage();
     updateUI();
-    window.scrollTo(0,0);
-  }
-
-  function toggleReaderView(view) {
-    const listArea = document.getElementById('reader-list-view');
-    const detailArea = document.getElementById('reader-detail-view');
-    if(view === 'list') { listArea.style.display = 'block'; detailArea.style.display = 'none'; renderNovels(); }
-    else { listArea.style.display = 'none'; detailArea.style.display = 'block'; }
-  }
-
-  function renderNovels() {
-    const list = document.getElementById('novel-list');
-    list.innerHTML = novels.length === 0 ? "<p style='text-align:center;'>Empty.</p>" : "";
-    novels.slice().reverse().forEach(n => {
-      const div = document.createElement('div');
-      div.className = 'novel-list-item';
-      div.onclick = () => showNovelDetail(n.id);
-      // 독자 리스트에서도 별점 수치를 가리고 '진행 중'으로 표시 (취향에 따라 별점 표시 유지 가능)
-      div.innerHTML = `<div><span style="font-weight:800; font-size:1.1rem;">『${n.title}』</span><br><small>AUTHOR: ${n.author}</small></div><div style="font-weight:800; color:var(--navy);">IN PROGRESS</div>`;
-      list.appendChild(div);
-    });
-  }
-
-  function showNovelDetail(id) {
-    const n = novels.find(x => x.id === id);
-    if(!n) return toggleReaderView('list');
-    const per = Math.min((n.stars / GOAL) * 100, 100).toFixed(1);
-    const isFunded = currentUser && fundHistory[currentUser.id] && fundHistory[currentUser.id].includes(id);
-    const novelReviews = reviews[id] || [];
-
-    const detailContent = document.getElementById('novel-detail-content');
-    detailContent.innerHTML = `
-      <div class="card">
-        <div class="card-title">『${n.title}』 ANALYSIS</div>
-        <p><strong>AUTHOR:</strong> ${n.author}</p>
-        <p style="font-size:0.8rem; color:var(--text-sub);">* 수치는 창작자 보호를 위해 비공개로 집계됩니다.</p>
-        <div class="progress-bg"><div class="progress-fill" style="width:${per}%"></div></div>
-        
-        <div class="vote-control">
-          <span class="vote-info">수량 선택:</span>
-          <input type="number" id="vote-count" value="1" min="1" max="10" oninput="updateVotePrice()">
-          <span class="vote-info" id="vote-price-display">(500 KRW)</span>
-          <button class="btn btn-sm" style="margin-left:auto; background:var(--yellow); color:var(--navy);" onclick="vote(${n.id}, '${n.authorId}')">VOTE NOW</button>
-        </div>
-      </div>
-      
-      <div class="card">
-        <div class="card-title">READER REVIEWS</div>
-        ${isFunded ? `
-          <div style="display:flex; gap:10px; margin-bottom:30px;">
-            <input type="text" id="rev-input" placeholder="한 줄 서평을 입력하세요.">
-            <button class="btn btn-sm" onclick="addReview(${n.id})" style="width:80px; padding:10px;">ADD</button>
-          </div>
-        ` : `<p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:20px;">* 펀딩에 참여하신 분만 서평을 작성할 수 있습니다.</p>`}
-        <div id="review-list-area">${novelReviews.map(r => <div class="review-item"><strong>${r.author}:</strong> ${r.text}</div>).reverse().join('')}</div>
-      </div>
-      
-      ${isFunded ? `<div class="card"><div class="card-title">MANUSCRIPT</div><div class="novel-body">${n.content}</div></div>` : 
-      `<div class="card" style="text-align:center; border: 2px dashed var(--border);"><p>🔒 펀딩 참여 후 원고 전문을 보실 수 있습니다.</p></div>`}
-    `;
-    toggleReaderView('detail');
-  }
-
-  function updateVotePrice() {
-    const count = document.getElementById('vote-count').value;
-    const display = document.getElementById('vote-price-display');
-    display.innerText = (${(count * PRICE).toLocaleString()} KRW);
-  }
-
-  function vote(novelId, authorId) {
-    if(!currentUser || currentUser.role !== 'reader') return alert("독자 회원만 투표 가능합니다.");
-    const count = parseInt(document.getElementById('vote-count').value);
-    const voteKey = ${currentUser.birth}_${currentUser.phone}_${authorId};
-    if(voteLog[voteKey]) return alert("부정 투표 방지: 이미 이 작가님에게 투표하셨습니다.");
-
-    const i = novels.findIndex(n => n.id === novelId); 
-    novels[i].stars += count; 
-    voteLog[voteKey] = true;
-
-    if(!fundHistory[currentUser.id]) fundHistory[currentUser.id] = [];
-    if(!fundHistory[currentUser.id].includes(novelId)) fundHistory[currentUser.id].push(novelId);
-    
-    localStorage.setItem('rv_novels', JSON.stringify(novels));
-    localStorage.setItem('rv_fund_history', JSON.stringify(fundHistory));
-    localStorage.setItem('rv_vote_log', JSON.stringify(voteLog));
-    
-    alert(`성공적으로 ${count}개의 별을 투표했습니다!`);
-    showNovelDetail(novelId);
-  }
-
-  // 작가 본인만 숫자를 확인할 수 있는 비밀 금고 렌더링
-  function renderMyPage() {
-    const area = document.getElementById('mypage-content');
-    if(!currentUser) return;
-    if(currentUser.role === 'writer') {
-      const myNovels = novels.filter(n => n.authorId === currentUser.id);
-      area.innerHTML = `<h4>내가 투고한 원고 (${myNovels.length})</h4>`;
-      myNovels.forEach(n => { 
-        area.innerHTML += `
-          <div class="novel-list-item" style="cursor:default; display:block; padding:30px;">
-            <b>『${n.title}』</b>
-            <div class="secret-vault">
-              <div id="vault-${n.id}" class="vault-hidden">
-                <span style="font-size:1.5rem; font-weight:800; color:var(--navy);">★ ${n.stars}</span>
-                <p style="margin:5px 0 0 0; font-size:0.8rem; color:var(--text-sub);">현재까지 모인 별의 개수</p>
-              </div>
-              <button class="btn btn-sm" id="btn-vault-${n.id}" style="margin-top:15px; background:var(--yellow); color:var(--navy);" onclick="unlockVault(${n.id})">데이터 잠금 해제</button>
-            </div>
-            <button class="btn btn-sm btn-danger" onclick="deleteNovel(${n.id})">원고 삭제</button>
-          </div>`; 
-      });
-    } else {
-      let myReviewsCount = 0;
-      let reviewHtml = `<h4>내가 남긴 서평</h4>`;
-      Object.keys(reviews).forEach(novelId => {
-        reviews[novelId].forEach(r => { if(r.authorId === currentUser.id) { myReviewsCount++; reviewHtml += <div class="review-item"><b>[${novels.find(x=>x.id==novelId)?.title}]</b> ${r.text}</div>; } });
-      });
-      area.innerHTML = myReviewsCount === 0 ? "<p>No reviews yet.</p>" : reviewHtml;
-    }
-  }
-
-  function unlockVault(id) {
-    document.getElementById(vault-${id}).classList.add('vault-visible');
-    document.getElementById(btn-vault-${id}).style.display = 'none';
-  }
-
-  function deleteNovel(id) {
-    const novel = novels.find(n => n.id === id);
-    if(!novel) return;
-    if(confirm(원고 '『${novel.title}』'을 삭제하시겠습니까?\n모든 데이터가 소멸됩니다.)) {
-      novels = novels.filter(n => n.id !== id);
-      localStorage.setItem('rv_novels', JSON.stringify(novels));
-      renderMyPage();
-    }
-  }
-
-  function addReview(novelId) {
-    const input = document.getElementById('rev-input');
-    if(!input.value.trim()) return;
-    if(!reviews[novelId]) reviews[novelId] = [];
-    reviews[novelId].push({ author: currentUser.name, authorId: currentUser.id, text: input.value });
-    localStorage.setItem('rv_reviews', JSON.stringify(reviews));
-    showNovelDetail(novelId);
-  }
-
-  function renderPublished() {
-    const grid = document.getElementById('published-grid');
-    grid.innerHTML = publishedBooks.length === 0 ? "<p>No collection registered.</p>" : publishedBooks.map(b => `
-      <div class="book-card">
-        <div class="book-img-wrapper"><img src="${b.img}" alt="${b.title}"></div>
-        <h3>${b.title}</h3>
-      </div>`).join('');
   }
 
   function updateUI() {
     const nav = document.getElementById('auth-nav');
     if(currentUser) {
-      nav.innerHTML = ${currentUser.name}님 <button class="logout-btn" onclick="logout()">[LOGOUT]</button>;
+      nav.innerHTML = `<span>${currentUser.name}님</span> <button class="logout-btn" onclick="logout()">LOGOUT</button>`;
       document.getElementById('link-admin').style.display = (currentUser.id === ADMIN_CONFIG.id) ? 'inline-block' : 'none';
-    } else { nav.innerHTML = "SIGN IN"; document.getElementById('link-admin').style.display = 'none'; }
-    if(document.getElementById('home').classList.contains('active')) renderAuthUI();
+    } else {
+      nav.innerHTML = "SIGN IN REQUIRED";
+      document.getElementById('link-admin').style.display = 'none';
+    }
+    renderAuthUI();
   }
 
   function renderAuthUI() {
     const area = document.getElementById('auth-ui');
-    if(currentUser) { area.innerHTML = <div style="text-align:center; padding:10px; font-weight:800;">WELCOME, ${currentUser.name}.</div>; }
-    else { area.innerHTML = `<div class="card" style="max-width:400px; margin:0 auto; border-top: 4px solid var(--navy);"><input type="text" id="li-id" placeholder="ID"><input type="password" id="li-pw" placeholder="PW"><button class="btn" onclick="login()">SIGN IN</button><hr style="margin:20px 0; border:0; border-top:1px solid #eee;"><select id="rg-role"><option value="writer">ARTIST JOIN</option><option value="reader">CURATOR JOIN</option></select><input type="text" id="rg-id" placeholder="ID"><input type="password" id="rg-pw" placeholder="PW"><input type="text" id="rg-name" placeholder="NAME"><input type="text" id="rg-birth" placeholder="BIRTH (YYYYMMDD)"><input type="text" id="rg-phone" placeholder="PHONE"><button class="btn" style="background:#f4f4f4; color:#333;" onclick="signup()">CREATE ACCOUNT</button></div>`; }
+    if(currentUser) {
+      area.innerHTML = `<div class="card" style="text-align:center; padding:20px;"><b>WELCOME, ${currentUser.name}.</b> 당신의 여정을 응원합니다.</div>`;
+    } else {
+      area.innerHTML = `
+        <div class="card" style="max-width:500px; margin:0 auto; border-top: 5px solid var(--navy);">
+          <div class="card-title">SIGN IN / JOIN</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div>
+              <p style="font-size:0.8rem; font-weight:800;">LOGIN</p>
+              <input type="text" id="li-id" placeholder="ID">
+              <input type="password" id="li-pw" placeholder="PW">
+              <button class="btn" onclick="login()">SIGN IN</button>
+            </div>
+            <div style="border-left:1px solid #eee; padding-left:20px;">
+              <p style="font-size:0.8rem; font-weight:800;">JOIN</p>
+              <select id="rg-role"><option value="writer">WRITER (작가)</option><option value="reader">READER (독자)</option></select>
+              <input type="text" id="rg-id" placeholder="ID"><input type="password" id="rg-pw" placeholder="PW">
+              <input type="text" id="rg-name" placeholder="NAME"><input type="text" id="rg-phone" placeholder="PHONE">
+              <button class="btn" style="background:#eee; color:#333;" onclick="signup()">CREATE</button>
+            </div>
+          </div>
+        </div>`;
+    }
   }
 
   function login() {
     const id = document.getElementById('li-id').value; const pw = document.getElementById('li-pw').value;
     if(id === ADMIN_CONFIG.id && pw === ADMIN_CONFIG.pw) currentUser = { id: 'admin', name: 'ADMIN', role: 'admin' };
     else { const user = users.find(u => u.id === id && u.pw === pw); if(!user) return alert("Fail"); currentUser = user; }
-    localStorage.setItem('rv_current', JSON.stringify(currentUser)); showPage('home');
+    localStorage.setItem('rv_current', JSON.stringify(currentUser)); updateUI();
   }
 
   function signup() {
     const role = document.getElementById('rg-role').value; const id = document.getElementById('rg-id').value;
     const pw = document.getElementById('rg-pw').value; const name = document.getElementById('rg-name').value;
-    const birth = document.getElementById('rg-birth').value; const phone = document.getElementById('rg-phone').value;
-    if(!id || !pw || !name || birth.length !== 8) return alert("Check Input");
-    users.push({id, pw, name, role, birth, phone});
-    localStorage.setItem('rv_users', JSON.stringify(users)); alert("Welcome!"); renderAuthUI();
+    const phone = document.getElementById('rg-phone').value;
+    if(!id || !pw || !name) return alert("입력 확인");
+    users.push({id, pw, name, role, phone});
+    localStorage.setItem('rv_users', JSON.stringify(users)); alert("환영합니다!"); renderAuthUI();
   }
 
-  function logout() { currentUser = null; localStorage.removeItem('rv_current'); showPage('home'); }
+  function logout() { currentUser = null; localStorage.removeItem('rv_current'); updateUI(); showPage('home'); }
+
+  // 비밀 금고 렌더링 (작가 본인만 해제 가능)
+  function renderMyPage() {
+    const area = document.getElementById('mypage-content');
+    if(!currentUser) return area.innerHTML = "로그인이 필요합니다.";
+    if(currentUser.role === 'writer') {
+      const myNovels = novels.filter(n => n.authorId === currentUser.id);
+      area.innerHTML = `<h4>내 투고 원고 (${myNovels.length})</h4>`;
+      myNovels.forEach(n => {
+        area.innerHTML += `
+          <div class="novel-list-item" style="display:block; cursor:default;">
+            <p><b>『${n.title}』</b></p>
+            <div class="secret-vault">
+              <div id="vault-${n.id}" class="vault-hidden">
+                <span style="font-size:1.5rem; font-weight:800; color:var(--navy);">★ ${n.stars}</span>
+                <p style="font-size:0.7rem; color:var(--text-sub);">현재까지 집계된 별점 수치</p>
+              </div>
+              <button class="btn btn-sm" id="btn-v-${n.id}" style="background:var(--yellow); color:var(--navy); margin-top:10px;" onclick="unlockVault(${n.id})">자존심 금고 열기</button>
+            </div>
+            <button class="btn btn-sm btn-danger" onclick="deleteNovel(${n.id})">삭제</button>
+          </div>`;
+      });
+    } else { area.innerHTML = "독자 활동 내역이 여기에 표시됩니다."; }
+  }
+
+  function unlockVault(id) {
+    document.getElementById(`vault-${id}`).classList.add('vault-visible');
+    document.getElementById(`btn-v-${id}`).style.display = 'none';
+  }
+
+  function renderNovels() {
+    const list = document.getElementById('novel-list');
+    list.innerHTML = novels.length === 0 ? "Empty." : "";
+    novels.slice().reverse().forEach(n => {
+      const div = document.createElement('div');
+      div.className = 'novel-list-item';
+      div.onclick = () => showNovelDetail(n.id);
+      div.innerHTML = `<div><b>『${n.title}』</b><br><small>${n.author}</small></div><div style="color:var(--purple); font-weight:800;">IN PROGRESS</div>`;
+      list.appendChild(div);
+    });
+  }
+
+  function showNovelDetail(id) {
+    const n = novels.find(x => x.id === id);
+    const per = Math.min((n.stars / GOAL) * 100, 100).toFixed(1);
+    document.getElementById('novel-detail-content').innerHTML = `
+      <div class="card">
+        <h3>『${n.title}』</h3>
+        <p>AUTHOR: ${n.author}</p>
+        <div class="progress-bg"><div class="progress-fill" style="width:${per}%"></div></div>
+        <p style="font-size:0.8rem; color:var(--text-sub);">* 수치는 작가 보호를 위해 비공개로 집계 중입니다.</p>
+        <div class="vote-control">
+          <input type="number" id="v-count" value="1" min="1" max="10">
+          <button class="btn btn-sm" onclick="vote(${n.id})">별점 투표 (500원)</button>
+        </div>
+      </div>
+      <div class="card"><h4>MANUSCRIPT</h4><div style="white-space:pre-wrap;">${n.content}</div></div>`;
+    toggleReaderView('detail');
+  }
+
+  function toggleReaderView(view) {
+    document.getElementById('reader-list-view').style.display = (view === 'list') ? 'block' : 'none';
+    document.getElementById('reader-detail-view').style.display = (view === 'detail') ? 'block' : 'none';
+    if(view === 'list') renderNovels();
+  }
+
+  function vote(novelId) {
+    if(!currentUser) return alert("로그인 필요");
+    const count = parseInt(document.getElementById('v-count').value);
+    const i = novels.findIndex(n => n.id === novelId);
+    novels[i].stars += count;
+    localStorage.setItem('rv_novels', JSON.stringify(novels));
+    alert("투표 완료"); showNovelDetail(novelId);
+  }
+
   function renderWriterForm() {
     const area = document.getElementById('writer-form-area');
-    if(!currentUser || currentUser.role !== 'writer') { area.innerHTML = "<p>Writer only.</p>"; return; }
-    area.innerHTML = `<input type="text" id="wt-title" placeholder="TITLE"><textarea id="wt-content" rows="15" placeholder="CONTENT"></textarea><button class="btn" onclick="saveNovel()">SUBMIT</button>`;
+    if(!currentUser || currentUser.role !== 'writer') { area.innerHTML = "작가 권한이 필요합니다."; return; }
+    area.innerHTML = `<input type="text" id="wt-title" placeholder="TITLE"><textarea id="wt-content" rows="10" placeholder="CONTENT"></textarea><button class="btn" onclick="saveNovel()">SUBMIT</button>`;
   }
+
   function saveNovel() {
     novels.push({ id: Date.now(), author: currentUser.name, authorId: currentUser.id, title: document.getElementById('wt-title').value, content: document.getElementById('wt-content').value, stars: 0 });
     localStorage.setItem('rv_novels', JSON.stringify(novels)); showPage('reader');
   }
-  
-  // 관리자 화면에서도 별점 수치를 볼 수 없게 '봉인' 처리
+
   function renderAdminManage() {
     const area = document.getElementById('admin-book-manage');
-    area.innerHTML = novels.length === 0 ? "Empty" : novels.map((n) => `
-      <div style="display:flex; justify-content:space-between; padding:15px; border-bottom:1px solid #eee; align-items:center;">
-        <span>『${n.title}』 - ${n.author}</span>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <span style="font-size:0.7rem; color:var(--purple);">[수치 봉인됨]</span>
-          <button class="btn btn-sm btn-danger" onclick="deleteNovelAdmin(${n.id})">삭제</button>
-        </div>
-      </div>`).join('');
+    area.innerHTML = novels.map(n => `<div style="padding:10px; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>『${n.title}』</span><span style="color:var(--purple);">[수치 봉인]</span></div>`).join('');
   }
-  
-  function deleteNovelAdmin(id) { if(confirm("관리자 권한으로 삭제하시겠습니까?")) { novels = novels.filter(n => n.id !== id); localStorage.setItem('rv_novels', JSON.stringify(novels)); renderAdminManage(); } }
 
-  function addPublishedBook() {
-    const t = document.getElementById('pub-title').value; const m = document.getElementById('pub-img-data').value;
-    if(!t || !m) return; publishedBooks.push({ title: t, img: m });
-    localStorage.setItem('rv_books', JSON.stringify(publishedBooks)); showPage('published');
+  function renderPublished() {
+    const grid = document.getElementById('published-grid');
+    grid.innerHTML = publishedBooks.map(b => `<div class="book-card"><img src="${b.img}" style="width:100%;"><h3>${b.title}</h3></div>`).join('');
   }
+
   function optimizeAndPreview(input) {
-    const file = input.files[0]; if(!file) return;
+    const file = input.files[0];
     const reader = new FileReader();
-    reader.onload = e => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas'); let w = img.width, h = img.height, max = 800;
-        if(w > h) { if(w > max) { h *= max/w; w = max; } } else { if(h > max) { w *= max/h; h = max; } }
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        document.getElementById('pub-img-data').value = canvas.toDataURL('image/jpeg', 0.8);
-        document.getElementById('file-name').innerText = "IMG READY";
-      };
-      img.src = e.target.result;
-    };
+    reader.onload = e => document.getElementById('pub-img-data').value = e.target.result;
     reader.readAsDataURL(file);
   }
 
-  showPage('home');
-</script>
-</body>
-</html>
+  function addPublishedBook() {
+    publishedBooks.push({ title: document.
